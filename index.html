@@ -389,7 +389,7 @@ function setupVisuals() {
 	//Dummy method to simulate swings 
 	d3.select("body").on("click", function(d) {
 		numSwings++; 
-		d3.select(".stepThreeTitle").text("Klaar voor slag " + (numSwings+1));
+		d3.select(".stepThreeTitle").text("Verwerken van slag " + numSwings);
 		redrawSwing(numSwings);  
 	})
 		
@@ -670,6 +670,13 @@ function redrawSwing(timeStamp) {
 			.style("opacity", 0.4); 
 			
 	
+	
+	////////////////////////////////////////////////////////////// 
+	///////////////////////// Finish ///////////////////////////// 
+	////////////////////////////////////////////////////////////// 
+	setTimeout(function() {
+		d3.select(".stepThreeTitle").text("Klaar voor slag " + (numSwings+1));
+	}, 5000);
 }//redrawSwing
 				
     </script>
