@@ -262,7 +262,7 @@ function setupVisuals() {
 		
 	//Create axes for the Ball Speed chart
 	ballSpeedScale = d3.scale.linear().domain([0, 185]).range([0, widthBallSpeed]);
-	ballSpeedAxis = d3.svg.axis().scale(ballSpeedScale).orient("bottom").tickSize(28).outerTickSize(0).tickFormat(d3.format("d"));
+	ballSpeedAxis = d3.svg.axis().scale(ballSpeedScale).orient("bottom").tickSize(5).outerTickSize(0).tickFormat(d3.format("d"));
 		
 	//Create Ball Speed SVG
 	ballSpeed = d3.select(".chart.ballSpeed").append("svg")
@@ -276,7 +276,7 @@ function setupVisuals() {
 	//Append x axis to chart
 	ballSpeed.append("g")
 	  .attr("class", "x axis")
-	  .attr("transform", "translate(0," + 0 + ")")
+	  .attr("transform", "translate(0," + 30 + ")")
 	  .call(ballSpeedAxis);
 
 	//SVG filter for the gooey effect
@@ -323,7 +323,7 @@ function setupVisuals() {
 		
 	//Create axes for the Club Speed chart
 	clubSpeedScale = d3.scale.linear().domain([0, 125]).range([0, widthClubSpeed]);
-	clubSpeedAxis = d3.svg.axis().scale(clubSpeedScale).orient("bottom").tickSize(28).outerTickSize(0).tickFormat(d3.format("d"));
+	clubSpeedAxis = d3.svg.axis().scale(clubSpeedScale).orient("bottom").tickSize(5).outerTickSize(0).tickFormat(d3.format("d"));
 		
 	//Create Club Speed SVG
 	clubSpeed = d3.select(".chart.clubSpeed").append("svg")
@@ -337,7 +337,7 @@ function setupVisuals() {
 	//Append x axis to chart
 	clubSpeed.append("g")
 	  .attr("class", "x axis")
-	  .attr("transform", "translate(0," + 0 + ")")
+	  .attr("transform", "translate(0," + 30 + ")")
 	  .call(clubSpeedAxis);
 	
 	//SVG filter for the gooey effect
@@ -381,11 +381,11 @@ function setupVisuals() {
 	//Margins and dimensions
 	marginCarry = {top: 30, right: 50, bottom: 30, left: 50};
 	widthCarry = $(".chart.carry").width() - marginCarry.left - marginCarry.right;
-	heightCarry = 400;
+	heightCarry = 300;
 		
 	//Create axes for the chart
 	carryScale = d3.scale.linear().domain([0, 290]).range([0, widthCarry]);
-	carryAxis = d3.svg.axis().scale(carryScale).orient("bottom").tickSize(100).outerTickSize(0).tickFormat(d3.format("d"));
+	carryAxis = d3.svg.axis().scale(carryScale).orient("bottom").tickSize(5).outerTickSize(0).tickFormat(d3.format("d"));
 		
 	//Create SVG
 	carry = d3.select(".chart.carry").append("svg")
@@ -399,12 +399,18 @@ function setupVisuals() {
 	//Append x axis to chart
 	carry.append("g")
 	  .attr("class", "x axis")
-	  .attr("transform", "translate(0," + 0 + ")")
+	  .attr("transform", "translate(0," + 100 + ")")
 	  .call(carryAxis);
-	 
-	carry.select(".axis path")
-	  .style("stroke-dasharray", "3 3")
-	  .style("stroke", "#D3D3D3");
+	  
+	//Append zero line to chart 
+	carry.append("line")
+		.attr("x1", 0)
+		.attr("y1", 0)
+		.attr("x2", widthCarry)
+		.attr("y2", 0)
+		.style("stroke-dasharray", "3 3")
+		.style("shape-rendering", "crispEdges")
+		.style("stroke", "#D3D3D3");
 
 	//SVG filter for the gooey effect
 	var defsCarry = carry.append('defs');
@@ -449,13 +455,14 @@ function setupVisuals() {
 			.attr("y2", 0)
 			.style("stroke-dasharray", "3 3")
 			.style("fill", "none")
-			.style("stroke", "#D3D3D3");	
+			.style("stroke", "#6B6B6B");	
 	//Append text for the Side number
 	carry.append("text")
 			.attr("class", "sideText")
 			.attr("x", 0)
 			.attr("y", 0)
-			.style("fill", "#4D4D4D");
+			.style("fill", "#4D4D4D")
+			.text("");
 			
 }//setupVisuals
 
@@ -492,6 +499,8 @@ function redrawSwing(timeStamp) {
 		d.ClubSpeed = +d.ClubSpeed;
 		d.Side = +d.Side;
 	})
+	
+	var index = timeStamp-1;
 	
 	////////////////////////////////////////////////////////////// 
 	/////////////////////// Ball Speed /////////////////////////// 
@@ -548,7 +557,7 @@ function redrawSwing(timeStamp) {
 			.transition("move").duration(1000).delay(ballSpeedDelay-1000)
 			.style("opacity", 0)
 			.transition("move").duration(ballSpeedDuration)
-			.attr("cx", ballSpeedScale(subset[(numSwings-1)].BallSpeed))
+			.attr("cx", ballSpeedScale(subset[index].BallSpeed))
 			.transition("move").duration(2000)
 			.style("opacity", 0.4); 
 
@@ -607,7 +616,7 @@ function redrawSwing(timeStamp) {
 			.transition("move").duration(1000).delay(clubSpeedDelay-1000)
 			.style("opacity", 0)
 			.transition("move").duration(clubSpeedDuration)
-			.attr("cx", clubSpeedScale(subset[(numSwings-1)].ClubSpeed))
+			.attr("cx", clubSpeedScale(subset[index].ClubSpeed))
 			.transition("move").duration(2000)
 			.style("opacity", 0.4); 
 			
@@ -617,6 +626,9 @@ function redrawSwing(timeStamp) {
 
 	var carryDelay = 5000,
 		carryDuration = 2000;
+
+	//Save the zero-line distance of the last swing in a variable
+	var triangle = Math.sqrt(subset[index].Carry*subset[index].Carry - subset[index].Side*subset[index].Side);
 
 	carryScale.domain([0, d3.max(subset, function(d) { return Math.sqrt(d.Carry*d.Carry - d.Side*d.Side); })*1.2]);
 	carryAxis.scale(carryScale);
@@ -668,18 +680,27 @@ function redrawSwing(timeStamp) {
 			.transition("move").duration(1000).delay(carryDelay-1000)
 			.style("opacity", 0)
 			.transition("move").duration(carryDuration)
-			.attr("cx", carryScale(Math.sqrt(subset[(numSwings-1)].Carry*subset[(numSwings-1)].Carry - subset[(numSwings-1)].Side*subset[(numSwings-1)].Side)))
-			.attr("cy", carryScale(subset[(numSwings-1)].Side))
+			.attr("cx", carryScale(triangle))
+			.attr("cy", carryScale(subset[index].Side))
 			.transition("move").duration(2000)
 			.style("opacity", 0.4); 
 			
 	//Move the line to show the actual side
 	carry.selectAll(".sideLine")
-		.attr("x1", carryScale(Math.sqrt(subset[(numSwings-1)].Carry*subset[(numSwings-1)].Carry - subset[(numSwings-1)].Side*subset[(numSwings-1)].Side)) + 0.1*carryScale.domain()[1])
-		.attr("x2", carryScale(Math.sqrt(subset[(numSwings-1)].Carry*subset[(numSwings-1)].Carry - subset[(numSwings-1)].Side*subset[(numSwings-1)].Side)) + 0.1*carryScale.domain()[1])
+		.attr("x1", carryScale(triangle) + 0.1*carryScale.domain()[1])
+		.attr("x2", carryScale(triangle) + 0.1*carryScale.domain()[1])
 		.attr("y2", 0)
 		.transition().duration(1000).delay(carryDelay+carryDuration)
-		.attr("y2", carryScale(subset[(numSwings-1)].Side));
+		.attr("y2", carryScale(subset[index].Side));
+	//Move the text to print the side
+	carry.selectAll(".sideText")
+		.style("opacity", 0)
+		.attr("x", carryScale(triangle) + 0.1*carryScale.domain()[1] + 10)
+		.attr("y", carryScale(subset[index].Side))
+		.text("Side: " + Math.round(carryScale(subset[index].Side),2) + " m")
+		.transition().duration(1000).delay(carryDelay+carryDuration+1000)
+		.style("opacity", 1);
+		
 	
 	////////////////////////////////////////////////////////////// 
 	///////////////////////// Finish ///////////////////////////// 

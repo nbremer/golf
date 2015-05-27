@@ -58,7 +58,11 @@ h3 {
 	display: none;
 }
 
-.axis path,
+.axis path {
+	fill: none;
+	stroke: none;
+}
+
 .axis line {
 	fill: none;
 	stroke: #BABABA;
@@ -66,5 +70,5 @@ h3 {
 }
 
 .tick line {
-	display: none;
+	stroke: #D3D3D3;
 }
