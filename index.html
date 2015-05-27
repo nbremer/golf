@@ -158,9 +158,9 @@ var data = [
     },
     {
         "AttackAngle": "-4.94",
-        "BallSpeed": "115.0010854",
+        "BallSpeed": "125.0010854",
         "Carry": "137.46",
-        "ClubSpeed": "82.878627",
+        "ClubSpeed": "75",
         "Side": "8.95",
         "Time": "2015-05-21 13:35:37.533967",
         "UID": "7ed5f514-3abb-43ed-9a25-174cd636f180",
@@ -403,7 +403,7 @@ function setupVisuals() {
 		
 	//Create axes for the Ball Speed chart
 	ballSpeedScale = d3.scale.linear().domain([0, 185]).range([0, widthBallSpeed]);
-	ballSpeedAxis = d3.svg.axis().scale(ballSpeedScale).orient("bottom").tickSize(20).outerTickSize(0).tickFormat(d3.format("d"));
+	ballSpeedAxis = d3.svg.axis().scale(ballSpeedScale).orient("bottom").tickSize(28).outerTickSize(0).tickFormat(d3.format("d"));
 		
 	//Create Ball Speed SVG
 	ballSpeed = d3.select(".chart.ballSpeed").append("svg")
@@ -419,8 +419,28 @@ function setupVisuals() {
 	  .attr("transform", "translate(0," + 0 + ")")
 	  .call(ballSpeedAxis);
 
+	//SVG filter for the gooey effect
+	var defsBallSpeed = ballSpeed.append('defs');
+	var filterBallSpeed = defsBallSpeed.append('filter').attr('id','gooBallSpeed');
+	filterBallSpeed.append('feGaussianBlur')
+		.attr('in','SourceGraphic')
+		.attr('stdDeviation','10')
+		.attr('result','blur');
+	filterBallSpeed.append('feColorMatrix')
+		.attr('in','blur')
+		.attr('mode','matrix')
+		.attr('values','1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7')
+		.attr('result','goo');
+	filterBallSpeed.append('feBlend')
+		.attr('in','SourceGraphic')
+		.attr('in2','goo');
+	
+	//Attach filter to svg
+	ballSpeed.style("filter", "url(#gooBallSpeed)");
+	
 	//Append circle at starting point
 	ballSpeed.append("circle")
+			.attr("class", "startCircle")
 			.attr("cx", 0)
 			.attr("cy", 0)
 			.attr("r", 10)
@@ -446,7 +466,7 @@ function setupVisuals() {
 		
 	//Create axes for the Club Speed chart
 	clubSpeedScale = d3.scale.linear().domain([0, 125]).range([0, widthClubSpeed]);
-	clubSpeedAxis = d3.svg.axis().scale(clubSpeedScale).orient("bottom").tickSize(20).outerTickSize(0).tickFormat(d3.format("d"));
+	clubSpeedAxis = d3.svg.axis().scale(clubSpeedScale).orient("bottom").tickSize(28).outerTickSize(0).tickFormat(d3.format("d"));
 		
 	//Create Club Speed SVG
 	clubSpeed = d3.select(".chart.clubSpeed").append("svg")
@@ -454,6 +474,7 @@ function setupVisuals() {
 		.attr("height", heightClubSpeed + marginClubSpeed.top + marginClubSpeed.bottom)
 	  .append("g")
 		.attr("class", "clubSpeedWrapper")
+		.style("filter", "url(#goo)")
 		.attr("transform", "translate(" + marginClubSpeed.left + "," + marginClubSpeed.top + ")");
 		
 	//Append x axis to chart
@@ -461,26 +482,28 @@ function setupVisuals() {
 	  .attr("class", "x axis")
 	  .attr("transform", "translate(0," + 0 + ")")
 	  .call(clubSpeedAxis);
-	  
-	var defs_1 = clubSpeed.append('defs');
-	var filter_2 = defs_1.append('filter').attr('id','goo');
-	var feGaussianBlur_3 = filter_2.append('feGaussianBlur')
+	
+	//SVG filter for the gooey effect
+	var defsClubSpeed = clubSpeed.append('defs');
+	var filterClubSpeed = defsClubSpeed.append('filter').attr('id','gooClubSpeed');
+	filterClubSpeed.append('feGaussianBlur')
 		.attr('in','SourceGraphic')
 		.attr('stdDeviation','10')
 		.attr('result','blur');
-	var feColorMatrix_4 = filter_2.append('feColorMatrix')
+	filterClubSpeed.append('feColorMatrix')
 		.attr('in','blur')
 		.attr('mode','matrix')
 		.attr('values','1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7')
 		.attr('result','goo');
-	var feBlend_5 = filter_2.append('feBlend')
+	filterClubSpeed.append('feBlend')
 		.attr('in','SourceGraphic')
 		.attr('in2','goo');
-		
-	clubSpeedCircles = clubSpeed.append("g").style("filter", "url(#goo)");
+	
+	//Attach filter to svg
+	clubSpeed.style("filter", "url(#gooClubSpeed)");	
 
 	//Append circle at starting point
-	clubSpeedCircles.append("circle")
+	clubSpeed.append("circle")
 			.attr("class", "startCircle")
 			.attr("cx", 0)
 			.attr("cy", 0)
@@ -533,23 +556,30 @@ function redrawSwing(timeStamp) {
 	////////////////////////////////////////////////////////////// 	
 
 	var ballSpeedDelay = 1000,
-		ballSpeeDuration = 3000;
+		ballSpeedDuration = 2000;
 		
 	ballSpeedScale.domain([0, d3.max(subset, function(d) { return d.BallSpeed; })*1.2]);
 	ballSpeedAxis.scale(ballSpeedScale);
 	//Update the x axis
 	ballSpeed.select(".x.axis")
-		.transition().duration(ballSpeeDuration).delay(ballSpeedDelay)
+		.transition().duration(ballSpeedDuration).delay(ballSpeedDelay)
 		.call(ballSpeedAxis);
 	
+	//Increase size of circle at 0,0 (then the swing is "ejected" and then decrease size again
+	ballSpeed.select(".startCircle")
+		.transition("startCircleGrow").duration(1000).delay((ballSpeedDelay-1000))
+		.attr("r", 20)
+		.transition("startCircleBounce").duration(ballSpeedDuration*1.5).delay((ballSpeedDelay+500)).ease("elastic")
+		.attr("r", 10);
+		
   	//DATA JOIN
 	//Join new data with old elements, if any
-	var ballSpeedWrapper = ballSpeed.selectAll(".ballspeedCircle")
+	var ballSpeedWrapper = ballSpeed.selectAll(".ballSpeedCircle")
 		.data(subset, function(d) { return d.id; });
 	  
 	//UPDATE
 	ballSpeedWrapper
-		.transition().duration(ballSpeeDuration).delay(ballSpeedDelay)
+		.transition().duration(ballSpeedDuration).delay(ballSpeedDelay)
 			.style("opacity", 0.5)
 			.attr("r", 5)
 			.attr("cx", function(d) { return ballSpeedScale(d.BallSpeed); });;	
@@ -557,14 +587,15 @@ function redrawSwing(timeStamp) {
 	//ENTER 
 	ballSpeedWrapper
 		.enter().append("circle")
-			.attr("class", "ballspeedCircle")
+			.attr("class", "ballSpeedCircle")
 			.attr("cx", 0)
 			.attr("cy", 0)
-			.attr("r", 8)
+			.attr("r", 0)
 			.style("fill", "#81BC00")
-			.style("opacity", 0)
-			.transition().duration(ballSpeeDuration).delay(ballSpeedDelay)
-			.style("opacity", 1)
+			.transition().duration(1000).delay((ballSpeedDelay-1000))
+			.attr("r", 20)
+			.transition().duration(ballSpeedDuration)
+			.attr("r", 8)
 			.attr("cx", function(d) { return ballSpeedScale(d.BallSpeed); });
 
 	//EXIT
@@ -574,7 +605,7 @@ function redrawSwing(timeStamp) {
 	ballSpeed.selectAll(".pulseCircle")
 			.transition("move").duration(1000).delay(ballSpeedDelay-1000)
 			.style("opacity", 0)
-			.transition("move").duration(ballSpeeDuration)
+			.transition("move").duration(ballSpeedDuration)
 			.attr("cx", ballSpeedScale(subset[(numSwings-1)].BallSpeed))
 			.transition("move").duration(2000)
 			.style("opacity", 0.4); 
@@ -583,8 +614,8 @@ function redrawSwing(timeStamp) {
 	/////////////////////// Club Speed /////////////////////////// 
 	////////////////////////////////////////////////////////////// 
 
-	var clubSpeedDelay = 4000,
-		clubSpeeDuration = 3000;
+	var clubSpeedDelay = 3000,
+		clubSpeeDuration = 2000;
 
 	clubSpeedScale.domain([0, d3.max(subset, function(d) { return d.ClubSpeed; })*1.2]);
 	clubSpeedAxis.scale(clubSpeedScale);
@@ -594,15 +625,15 @@ function redrawSwing(timeStamp) {
 		.call(clubSpeedAxis);
 		
 	//Increase size of circle at 0,0 (then the swing is "ejected" and then decrease size again
-	clubSpeedCircles.select(".startCircle")
-		.transition().duration(1000).delay((clubSpeedDelay-1000))
+	clubSpeed.select(".startCircle")
+		.transition("startCircleGrow").duration(1000).delay((clubSpeedDelay-1000))
 		.attr("r", 20)
-		.transition().duration(clubSpeeDuration)
+		.transition("startCircleBounce").duration(clubSpeeDuration*1.5).delay((clubSpeedDelay+500)).ease("elastic")
 		.attr("r", 10);
 	
   	//DATA JOIN
 	//Join new data with old elements, if any
-	var clubSpeedWrapper = clubSpeedCircles.selectAll(".clubspeedCircle")
+	var clubSpeedWrapper = clubSpeed.selectAll(".clubSpeedCircle")
 		.data(subset, function(d) { return d.id; });
 	  
 	//UPDATE
@@ -615,7 +646,7 @@ function redrawSwing(timeStamp) {
 	//ENTER 
 	clubSpeedWrapper
 		.enter().append("circle")
-			.attr("class", "clubspeedCircle")
+			.attr("class", "clubSpeedCircle")
 			.attr("cx", 0)
 			.attr("cy", 0)
 			.attr("r", 0)
