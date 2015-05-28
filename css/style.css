@@ -28,6 +28,11 @@ h3 {
 	font-size: 28px;
 }
 
+h5 {
+	fill: #6B6B6B;
+	color: #6B6B6B;
+}
+
 .chartWrapper {
 	padding: 30px 0px;
 }

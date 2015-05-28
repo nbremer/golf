@@ -9,7 +9,7 @@
 	<!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
 	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
-	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="js/d3.v3.min.js"></script>
 		
 	<!-- jQuery -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -19,6 +19,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 	<link rel="stylesheet" href="css/style.css">
+	<script src="js/peerGroups.js"></script>
+	<script src="js/setupVisuals.js"></script>
+	<script src="js/redrawSwing.js"></script>
 	
 </head>
 <body>
@@ -50,26 +53,26 @@
 						<div class="col-sm-12 column text-center">					
 							<div class="col-sm-4 column text-center">						
 								<h3 style="padding-bottom: 10px; padding-top: 10px;">Geslacht</h3>
-								<div id="buttonWrapper" class="btn-group" data-toggle="buttons">
-									<label id="maleButton" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> Man </label>
-									<label id="femaleButton" class="btn btn-default active btn-xlarge"><input type="radio" class="btn-options"> Vrouw </label>
+								<div id="buttonWrapper" class="btn-group gender" data-toggle="buttons">
+									<label id="button_Man" class="btn btn-default btn-xlarge" value="Man"><input type="radio" "class="btn-options"> Man </label>
+									<label id="button_Vrouw" class="btn btn-default active btn-xlarge" value="Vrouw"><input type="radio" value="Female" class="btn-options"> Vrouw </label>
 								</div>
 							</div>
 							<div class="col-sm-4 column text-center">	
 								<h3 style="padding-bottom: 10px;">Geboortejaar</h3>
-								<div id="buttonWrapper" class="btn-group" data-toggle="buttons">
-									<label id="1950_Button" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> < 1975 </label>
-									<label id="1975_Button" class="btn btn-default active btn-xlarge"><input type="radio" class="btn-options"> 1975 - 1985 </label>
-									<label id="1985_Button" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> > 1985 </label>
+								<div id="buttonWrapper" class="btn-group age" data-toggle="buttons">
+									<label id="button_1950_1975" value="1950_1975" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> < 1975 </label>
+									<label id="button_1975_1985" value="1975_1985" class="btn btn-default active btn-xlarge"><input type="radio" class="btn-options"> 1975 - 1985 </label>
+									<label id="button_1985_1997" value="1985_1997" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> > 1985 </label>
 								</div>
 							</div>
 							<div class="col-sm-4 column text-center">			
 								<h3 style="padding-bottom: 10px;">Handicap</h3>
-								<div id="buttonWrapper" class="btn-group" data-toggle="buttons">
-									<label id="0_Button" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 0 - 5 </label>
-									<label id="5_Button" class="btn btn-default active btn-xlarge"><input type="radio" class="btn-options"> 5 - 15 </label>
-									<label id="15_Button" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 15 - 25 </label>
-									<label id="25_Button" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 25 - 36 </label>
+								<div id="buttonWrapper" class="btn-group handicap" data-toggle="buttons">
+									<label id="button_0_5" value="0_5" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 0 - 5 </label>
+									<label id="button_5_15" value="5_15" class="btn btn-default active btn-xlarge"><input type="radio" class="btn-options"> 5 - 15 </label>
+									<label id="button_15_25" value="15_25" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 15 - 25 </label>
+									<label id="button_25_36" value="25_36" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 25 - 36 </label>
 								</div>
 							</div>
 						</div>
@@ -130,7 +133,14 @@
 						<div class="chart carry"></div>
 					</div>	
 					<div class="col-sm-6 column text-center">
+						<h5 style="padding-bottom: 10px;">Angle of Attack [degrees]</h5>
 						<div class="chart aoa"></div>
+					</div>
+				</div>
+				
+				<div class="row text-center">
+					<div class="col-sm-12 column text-center">
+						<div class="finishButton"></div>
 					</div>
 				</div>
 			</div>
