@@ -385,12 +385,29 @@ function setupVisuals() {
 		.attr("height", ImageWidth*2)
 		.attr("text-anchor", "middle");	
 	
+	var gradientLinear = AoA
+		.append("linearGradient")
+		.attr("id", "gradientLinear")
+		.attr("gradientUnits", "objectBoundingBox") 
+		.attr("y1", "0")
+		.attr("y2", "0")
+		.attr("x1", "0")
+		.attr("x2", "100%")
+		.selectAll("stop") 
+		.data([                             
+				{offset: "0%", color: "#eaffbc"}, 			
+				{offset: "90%", color: "#81BC00"}    
+			])                  
+		.enter().append("stop") 
+		.attr("offset", function(d) { return d.offset; })   
+		.attr("stop-color", function(d) { return d.color; });
+		
 	//Streamlet
-	//<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M12.7,25.3c0,0,415.5,36.3,413.1,0C423.5-11,12.7,25.3,12.7,25.3z"/>
 	AoA.append("path")
-            .attr("d","M12.7,25.3c0,0,415.5,36.3,413.1,0C423.5-11,12.7,25.3,12.7,25.3z")
-			.attr("transform", "scale(0.2)")
-            .style("fill", "#81BC00");
+            //.attr("d","M12.7,25.3c0,0,415.5,36.3,413.1,0C423.5-11,12.7,25.3,12.7,25.3z")
+			.attr("d", "M12.8,20c0,0,413.9,26.4,412.7,0.3S12.8,20,12.8,20z")
+			.attr("transform", "translate(" + (ImageWidth*6/4) + ",0) scale(0.2)")
+            .style("fill", "url(#gradientLinear)");
 	////////////////////////////////////////////////////////////// 
 	//////////////// Finished swings Button ////////////////////// 
 	////////////////////////////////////////////////////////////// 
