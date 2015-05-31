@@ -260,7 +260,7 @@ function setupVisuals() {
 	//Append x axis to chart
 	carry.append("g")
 	  .attr("class", "x axis")
-	  .attr("transform", "translate(0," + 100 + ")")
+	  .attr("transform", "translate(0," + 130 + ")")
 	  .call(carryAxis);
 	  
 	//Append zero line to chart 
