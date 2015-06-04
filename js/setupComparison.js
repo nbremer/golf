@@ -175,7 +175,7 @@ function setupComparison() {
 
 
 	var margin = {top: 100, right: 100, bottom: 100, left: 100},
-		width = $(".radarChart").width() - margin.left - margin.right,
+		width = Math.min(700, $(".radarChart").width()) - margin.left - margin.right,
 		height = width;
 			
 	////////////////////////////////////////////////////////////// 
