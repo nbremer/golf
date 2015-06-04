@@ -7,18 +7,27 @@ function moveTwoToThree() {
 
 	//Decrease size, decrease opacity then remove
 	d3.selectAll(".submitCircle")
-		.transition().duration(500)
+		.transition().duration(750)
 		.attr("r", 0)
 		.style("opacity", 0)
 		.remove();
-	
+
+	d3.selectAll(".stepTwoElements")
+		.transition().duration(750)
+		.style("opacity", 0);
+		
 	//Hide previous section and display the swing visuals
 	setTimeout(function(d) {
 		d3.selectAll(".stepTwoElements").style("display", "none");
 		d3.select(".greenSubmitDot").remove();
-		d3.selectAll(".stepThreeElements").style("display", "block");
+		d3.selectAll(".stepThreeElements")
+			.style("opacity", 0)
+			.style("display", "block")
+			.transition().duration(750)
+				.style("opacity", 1);
+				
 		setupVisuals();		
-	}, 500);
+	}, 750);
 
 }//moveTwoToThree	
 
@@ -63,14 +72,22 @@ var	marginCarry,
 	carryScale,
 	carryAxis,
 	carry;
+
+var	marginAoA,
+	widthAoA,
+	heightAoA,
+	AoAScale,
+	AoA;
+var lineLength;
 	
 var chosenPeerGroup,
-	meanClubSpeed,
-	meanBallSpeed,
-	meanAoA,
-	meanCarry,
-	meanSide,
-	meanTriangle;
+	meanClubSpeed = 0,
+	meanBallSpeed = 0,
+	meanAoA = 0,
+	meanCarry = 0,
+	meanSide = 0,
+	meanTriangle = 0;
+	
 	
 //Set up all the 4 charts (without any data shown yet)
 function setupVisuals() {
@@ -78,18 +95,26 @@ function setupVisuals() {
 	//Dummy method to simulate swings 
 	d3.select("body").on("click", function(d) {
 		numSwings++; 
-		d3.select(".stepThreeTitle").text("Verwerken van slag " + numSwings);
+		
+		d3.select(".stepThreeTitle").transition().duration(500)
+			.style("opacity", 0)
+			.each("end", function(d) { d3.select(".stepThreeTitle").text("Verwerken van slag " + numSwings) })
+			.transition().duration(500)
+			.style("opacity", 1);
+			
 		redrawSwing(numSwings);  
 	})
 	
 	//Define the peer group means
 	chosenPeerGroup = peerGroup.filter(function(d) { return d.Age === peerGroupAge & d.Gender ===	peerGroupGender & d.Handicap === peerGroupHandicap; });
-	meanClubSpeed = chosenPeerGroup[0].Mean;
-	meanBallSpeed = chosenPeerGroup[1].Mean;
-	meanAoA = chosenPeerGroup[2].Mean;
-	meanCarry = chosenPeerGroup[3].Mean;
-	meanSide = chosenPeerGroup[4].Mean;
-	meanTriangle = Math.sqrt(meanCarry*meanCarry - meanSide*meanSide);
+	if (chosenPeerGroup.length > 0) {
+		meanClubSpeed = chosenPeerGroup[0].Mean;
+		meanBallSpeed = chosenPeerGroup[1].Mean;
+		meanAoA = chosenPeerGroup[2].Mean;
+		meanCarry = chosenPeerGroup[3].Mean;
+		meanSide = chosenPeerGroup[4].Mean;
+		meanTriangle = Math.sqrt(meanCarry*meanCarry - meanSide*meanSide);
+	}//if
 			
 	////////////////////////////////////////////////////////////// 
 	////////////////////// Ball Speed //////////////////////////// 
@@ -135,15 +160,17 @@ function setupVisuals() {
 		.attr('in2','goo');
 		
 	//Append small bar for peer group average
-	ballSpeed.append("line")
-		.attr("class", "meanBallSpeedLine")
-		.attr("x1", ballSpeedScale(meanBallSpeed))
-		.attr("y1", -15)
-		.attr("x2", ballSpeedScale(meanBallSpeed))
-		.attr("y2", 15)
-		.style("stroke-width", "4")
-		.style("shape-rendering", "crispEdges")
-		.style("stroke", "#D3D3D3");		
+	if (chosenPeerGroup.length > 0) {
+		ballSpeed.append("line")
+			.attr("class", "meanBallSpeedLine")
+			.attr("x1", ballSpeedScale(meanBallSpeed))
+			.attr("y1", -15)
+			.attr("x2", ballSpeedScale(meanBallSpeed))
+			.attr("y2", 15)
+			.style("stroke-width", "4")
+			.style("shape-rendering", "crispEdges")
+			.style("stroke", peerGroupColor);		
+	}//if
 	
 	//Append circle at starting point
 	ballSpeed.append("circle")
@@ -207,16 +234,18 @@ function setupVisuals() {
 		.attr('in2','goo');
 
 	//Append small bar for peer group average
-	clubSpeed.append("line")
-		.attr("class", "meanClubSpeedLine")
-		.attr("x1", clubSpeedScale(meanClubSpeed))
-		.attr("y1", -15)
-		.attr("x2", clubSpeedScale(meanClubSpeed))
-		.attr("y2", 15)
-		.style("stroke-width", "4")
-		.style("shape-rendering", "crispEdges")
-		.style("stroke", "#D3D3D3");
-		
+	if (chosenPeerGroup.length > 0) {
+		clubSpeed.append("line")
+			.attr("class", "meanClubSpeedLine")
+			.attr("x1", clubSpeedScale(meanClubSpeed))
+			.attr("y1", -15)
+			.attr("x2", clubSpeedScale(meanClubSpeed))
+			.attr("y2", 15)
+			.style("stroke-width", "4")
+			.style("shape-rendering", "crispEdges")
+			.style("stroke", peerGroupColor);
+	}//if
+	
 	//Append circle at starting point
 	clubSpeed.append("circle")
 			.attr("class", "startCircle")
@@ -290,14 +319,16 @@ function setupVisuals() {
 		.attr('in2','goo');
 		
 	//Append two diamonds for the average of the peer group
-	carry.selectAll(".meanCarrySymbol")
-		.data([-1,1])
-		.enter().append("path")
-		.attr("class", "meanCarrySymbol")
-		.attr("d", d3.svg.symbol().size(50).type("diamond"))
-		.attr("transform", function(d) { return "translate(" + carryScale(meanTriangle)  + ", " + (d*carryScale(meanSide)) + ")"; })    
-		.style("fill", "#D3D3D3");
-			
+	if (chosenPeerGroup.length > 0) {
+		carry.selectAll(".meanCarrySymbol")
+			.data([-1,1])
+			.enter().append("path")
+			.attr("class", "meanCarrySymbol")
+			.attr("d", d3.svg.symbol().size(50).type("diamond"))
+			.attr("transform", function(d) { return "translate(" + carryScale(meanTriangle)  + ", " + (d*carryScale(meanSide)) + ")"; })    
+			.style("fill", peerGroupColor);
+	}//if
+	
 	//Append line for the Side dash
 	carry.append("line")
 			.attr("class", "sideLine")
@@ -361,18 +392,20 @@ function setupVisuals() {
 	marginAoA = {top: 30, right: 50, bottom: 30, left: 50};
 	widthAoA = $(".chart.aoa").width() - marginAoA.left - marginAoA.right;
 	heightAoA = 300;
-		
+
+	var imageWidth = 80;
+	lineLength = 3 * imageWidth;
+	
 	//Create axes for the chart
 	AoAScale = d3.scale.linear().domain([-5, 5]).range([30, -30]);
-	//AoAAxis = d3.svg.axis().scale(AoAScale).orient("bottom").tickSize(5).outerTickSize(0).tickFormat(d3.format("d"));
-		
+	
 	//Create SVG
 	AoA = d3.select(".chart.aoa").append("svg")
 		.attr("width", widthAoA + marginAoA.left + marginAoA.right)
 		.attr("height", heightAoA + marginAoA.top + marginAoA.bottom)
 	  .append("g")
 		.attr("class", "AoAWrapper")
-		.attr("transform", "translate(" + (marginAoA.left + widthAoA/2) + "," + (marginAoA.top + heightAoA/2)  + ")");	
+		.attr("transform", "translate(" + (marginAoA.left + widthAoA/4) + "," + (marginAoA.top + heightAoA/2)  + ")");	
 
 	/*//Streamlet
 	AoA.append("path")
@@ -391,30 +424,30 @@ function setupVisuals() {
 		.style("shape-rendering", "crispEdges")
 		.style("stroke", "#D3D3D3");
 		
-	//Place golfball in center
-	var ImageWidth = 80;
-	var lineWidth = 2 * ImageWidth;
 	//Append small bar for peer group average
-	AoA.append("line")
-		.attr("class", "meanAoALine")
-		.attr("x1", 0)
-		.attr("y1", 0)
-		.attr("x2", Math.cos(AoAScale(meanAoA) * Math.PI/180) * lineWidth)
-		.attr("y2", Math.sin(AoAScale(meanAoA) * Math.PI/180) * lineWidth)
-		.style("stroke-width", "2")
-		.style("stroke-linecap", "round")
-		.style("stroke", "#D3D3D3");
+	if (chosenPeerGroup.length > 0) {
+		AoA.append("line")
+			.attr("class", "meanAoALine")
+			.attr("x1", 0)
+			.attr("y1", 0)
+			.attr("x2", Math.cos(AoAScale(meanAoA) * Math.PI/180) * lineLength)
+			.attr("y2", Math.sin(AoAScale(meanAoA) * Math.PI/180) * lineLength)
+			.style("stroke-width", "2")
+			.style("stroke-linecap", "round")
+			.style("stroke", peerGroupColor);
+	}//if
 	
 	//Golf ball image
 	AoA.append("svg:image")
-		.attr("x", -ImageWidth/2)
-		.attr("y", -ImageWidth/2)
+		.attr("x", -imageWidth/2)
+		.attr("y", -imageWidth/2)
 		.attr("class", "golfball")
 		.attr("xlink:href", "img/golfball-grey-white.png")
-		.attr("width", ImageWidth)
-		.attr("height", ImageWidth)
+		.attr("width", imageWidth)
+		.attr("height", imageWidth)
 		.attr("text-anchor", "middle");	
 	
+	//Create lightgreen - darker green gradient to fill paths later on
 	var gradientLinear = AoA
 		.append("linearGradient")
 		.attr("id", "gradientLinear")
@@ -433,14 +466,12 @@ function setupVisuals() {
 		.attr("stop-color", function(d) { return d.color; });
 
 	
-	//Append path for the angle
-	var startValue = meanAoA > 0 ? AoAScale(meanAoA) : 0,
-		endValue = meanAoA > 0 ?  0 : AoAScale(meanAoA);
+	//Append path for the angle arc
 	AoA.append("path")
 			.attr("class", "AoAPath")
 			.attr("x", 0)
 			.attr("y", 0)
-			.attr("d", describeArc(0, 0, lineWidth*0.8, startValue, endValue))
+			.attr("d", describeArc(0, 0, lineLength*0.8, 0, 0))
 			.style("stroke-dasharray", "3 3")
 			.style("fill", "none")
 			.style("stroke", "#6B6B6B");	
@@ -464,7 +495,7 @@ function setupVisuals() {
 		.attr("width", widthCircle)
 		.attr("height", heightCircle)
 		.attr("class", "greenFinishDot")
-		//.on("click", setupCharts)
+		.on("click", moveThreeToFour)
 	  .append("g")
 		.attr("transform", "translate(" + widthCircle/2 + "," + heightCircle/2 + ")");
 		

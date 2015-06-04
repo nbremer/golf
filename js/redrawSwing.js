@@ -31,10 +31,12 @@ function redrawSwing(numSwings) {
 		.call(ballSpeedAxis);
 		
 	//Move the mean peer group bar
-	ballSpeed.select(".meanBallSpeedLine")
-		.transition().duration(ballSpeedDuration).delay(ballSpeedDelay)
-		.attr("x1", ballSpeedScale(meanBallSpeed))
-		.attr("x2", ballSpeedScale(meanBallSpeed));
+	if (chosenPeerGroup.length > 0) {
+		ballSpeed.select(".meanBallSpeedLine")
+			.transition().duration(ballSpeedDuration).delay(ballSpeedDelay)
+			.attr("x1", ballSpeedScale(meanBallSpeed))
+			.attr("x2", ballSpeedScale(meanBallSpeed));
+	}//if
 	
 	//Increase size of circle at 0,0 (then the swing is "ejected" and then decrease size again
 	ballSpeed.select(".startCircle")
@@ -103,10 +105,12 @@ function redrawSwing(numSwings) {
 		.attr("r", 10);
 
 	//Move the mean peer group bar
-	clubSpeed.select(".meanClubSpeedLine")
-		.transition().duration(clubSpeedDuration).delay(clubSpeedDelay)
-		.attr("x1", clubSpeedScale(meanClubSpeed))
-		.attr("x2", clubSpeedScale(meanClubSpeed));
+	if (chosenPeerGroup.length > 0) {
+		clubSpeed.select(".meanClubSpeedLine")
+			.transition().duration(clubSpeedDuration).delay(clubSpeedDelay)
+			.attr("x1", clubSpeedScale(meanClubSpeed))
+			.attr("x2", clubSpeedScale(meanClubSpeed));
+	}//if
 		
   	//DATA JOIN
 	//Join new data with old elements, if any
@@ -171,10 +175,12 @@ function redrawSwing(numSwings) {
 		.attr("r", 10);
 	
 	//Move the mean peer group symbols
-	carry.selectAll(".meanCarrySymbol")
-		.transition().duration(carryDuration).delay(carryDelay)
-		.attr("transform", function(d) { return "translate(" + carryScale(meanTriangle)  + ", " + (d*carryScale(meanSide)) + ")"; });
-		
+	if (chosenPeerGroup.length > 0) {
+		carry.selectAll(".meanCarrySymbol")
+			.transition().duration(carryDuration).delay(carryDelay)
+			.attr("transform", function(d) { return "translate(" + carryScale(meanTriangle)  + ", " + (d*carryScale(meanSide)) + ")"; });
+	}//if
+	
   	//DATA JOIN
 	//Join new data with old elements, if any
 	var carryWrapper = carry.selectAll(".carryCircle")
@@ -232,7 +238,6 @@ function redrawSwing(numSwings) {
 		.transition().duration(1000).delay(carryDelay+carryDuration+1000)
 		.style("opacity", 1);
 		
-		
 	//Move the line to show the actual carry
 	carry.selectAll(".carryLine")
 		.attr("x2", 0)
@@ -253,19 +258,21 @@ function redrawSwing(numSwings) {
 	///////////////////// Angle of Attack //////////////////////// 
 	////////////////////////////////////////////////////////////// 
 
-	var AoADelay = 8000,
-		AoADuration = 1000,
-		lineWidth = 160;
+	var AoADelay = 9000,
+		AoADuration = 1000;
 
 	//Update the exis if needed
-	AoAScale.domain([Math.min(-5, d3.min(subset, function(d) { return d.AttackAngle; })*1.2), Math.max(5, d3.max(subset, function(d) { return d.AttackAngle; })*1.2)]);
+	var maxAngle = Math.max(Math.abs(d3.min(subset, function(d) { return d.AttackAngle; })), Math.abs(d3.max(subset, function(d) { return d.AttackAngle; })))*1.1;
+	AoAScale.domain([Math.min(-5, -1*maxAngle), Math.max(5, maxAngle)]);
 	
-	//Move the mean peer group symbols
-	AoA.selectAll(".meanAoALine")
-		.transition().duration(AoADuration).delay(AoADelay)
-		.attr("x2", Math.cos(AoAScale(meanAoA) * Math.PI/180) * lineWidth)
-		.attr("y2", Math.sin(AoAScale(meanAoA) * Math.PI/180) * lineWidth);
-		
+	//Move the mean peer group line
+	if (chosenPeerGroup.length > 0) {
+		AoA.selectAll(".meanAoALine")
+			.transition().duration(AoADuration).delay(AoADelay)
+			.attr("x2", Math.cos(AoAScale(meanAoA) * Math.PI/180) * lineLength)
+			.attr("y2", Math.sin(AoAScale(meanAoA) * Math.PI/180) * lineLength);
+	}//if
+	
   	//DATA JOIN
 	//Join new data with old elements, if any
 	var AoAwrapper = AoA.selectAll(".AoALine")
@@ -276,8 +283,8 @@ function redrawSwing(numSwings) {
 		.transition().duration(AoADuration).delay(AoADelay)
 			.style("opacity", 0.5)
 			.style("stroke-width", "2")
-			.attr("x2", function(d) { return Math.cos(AoAScale(d.AttackAngle) * Math.PI/180) * lineWidth; })
-			.attr("y2", function(d) { return Math.sin(AoAScale(d.AttackAngle) * Math.PI/180) * lineWidth; });
+			.attr("x2", function(d) { return Math.cos(AoAScale(d.AttackAngle) * Math.PI/180) * lineLength; })
+			.attr("y2", function(d) { return Math.sin(AoAScale(d.AttackAngle) * Math.PI/180) * lineLength; });
 	
 	//ENTER 
 	AoAwrapper
@@ -285,13 +292,13 @@ function redrawSwing(numSwings) {
 			.attr("class", "AoALine")
 			.attr("x1", 0)
 			.attr("y1", 0)
-			.attr("x2", function(d) { return Math.cos(AoAScale(d.AttackAngle) * Math.PI/180) * lineWidth; })
-			.attr("y2", function(d) { return Math.sin(AoAScale(d.AttackAngle) * Math.PI/180) * lineWidth; })
+			.attr("x2", function(d) { return Math.cos(AoAScale(d.AttackAngle) * Math.PI/180) * lineLength; })
+			.attr("y2", function(d) { return Math.sin(AoAScale(d.AttackAngle) * Math.PI/180) * lineLength; })
 			.style("stroke", "url(#gradientLinear)")
 			.style("stroke-linecap", "round")
 			.style("stroke-width", "4")
-			.attr("stroke-dasharray", lineWidth + " " + lineWidth)
-			.attr("stroke-dashoffset", lineWidth)
+			.attr("stroke-dasharray", lineLength + " " + lineLength)
+			.attr("stroke-dashoffset", lineLength)
 			.transition().duration(AoADuration).delay(AoADelay)
 				//.ease("linear")
 				.attr("stroke-dashoffset", 0);
@@ -302,19 +309,19 @@ function redrawSwing(numSwings) {
 	//Move the golf ball to the front over the lines
 	d3.select(".golfball").moveToFront();
 	
-	
+	//Add arc and text for angle
 	var startValue = subset[index].AttackAngle > 0 ? AoAScale(subset[index].AttackAngle) : 0,
 		endValue = subset[index].AttackAngle > 0 ?  0 : AoAScale(subset[index].AttackAngle);
 	//Append path for the angle
 	AoA.select(".AoAPath")
-			.attr("d", describeArc(0, 0, lineWidth*0.9, 0, 0))
+			.attr("d", describeArc(0, 0, lineLength*0.9, 0, 0))
 			.transition().duration(1000).delay(AoADelay+AoADuration)
-			.attr("d", describeArc(0, 0, lineWidth*0.9, startValue, endValue));	
+			.attr("d", describeArc(0, 0, lineLength*0.9, startValue, endValue));	
 	//Append text for the angle number
 	AoA.select(".AoAText")
 			.style("opacity", 0)
-			.attr("x", function(d) { return Math.cos(AoAScale(subset[index].AttackAngle) * Math.PI/180) * lineWidth + 10; })
-			.attr("y", function(d) { return Math.sin(AoAScale(subset[index].AttackAngle) * Math.PI/180) * lineWidth; })
+			.attr("x", function(d) { return Math.cos(AoAScale(subset[index].AttackAngle) * Math.PI/180) * lineLength + 10; })
+			.attr("y", function(d) { return Math.sin(AoAScale(subset[index].AttackAngle) * Math.PI/180) * lineLength; })
 			.style("fill", "#292929")
 			.text("Angle of Attack: " + Math.round(subset[index].AttackAngle*100)/100 + "°")
 			.transition().duration(1000).delay(AoADelay+AoADuration+1000)
@@ -323,7 +330,10 @@ function redrawSwing(numSwings) {
 	////////////////////////////////////////////////////////////// 
 	///////////////////////// Finish ///////////////////////////// 
 	////////////////////////////////////////////////////////////// 
-	setTimeout(function() {
-		d3.select(".stepThreeTitle").text("Klaar voor slag " + (numSwings+1));
-	}, 5000);
+	
+	d3.select(".stepThreeTitle").transition().duration(500).delay(12000)
+			.style("opacity", 0)
+			.each("end", function(d) { d3.select(".stepThreeTitle").text("Klaar voor slag " + (numSwings+1)) })
+			.transition().duration(500)
+			.style("opacity", 1);
 }//redrawSwing

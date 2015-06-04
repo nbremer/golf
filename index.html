@@ -22,6 +22,7 @@
 	<script src="js/peerGroups.js"></script>
 	<script src="js/setupVisuals.js"></script>
 	<script src="js/redrawSwing.js"></script>
+	<script src="js/setupComparison.js"></script>	
 	
 </head>
 <body>
@@ -39,7 +40,11 @@
 					<h3 style="color: #575757;">Swing Analytics</h1>
 					<hr>
 					<img style="padding-top: 70px;" width=500 src="img/Deloitte-logo.png"/>
-					<h4 style="color: #999; padding-top: 30px;">#WelkeGolfProBenJij</h4>
+					<h4 style="color: #999; padding-top: 30px; padding-bottom: 40px;">#WelkeGolfProBenJij</h4>
+					<hr>
+					<h5 style="color: #999; padding-top: 50px;">Powered by</h5>
+					<img style="padding-top: 10px;" width=200 src="img/Trackman-logo.png"/>
+					
 				</div>
 			</div>
 			
@@ -63,7 +68,8 @@
 								<div id="buttonWrapper" class="btn-group age" data-toggle="buttons">
 									<label id="button_1950_1975" value="1950_1975" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> < 1975 </label>
 									<label id="button_1975_1985" value="1975_1985" class="btn btn-default active btn-xlarge"><input type="radio" class="btn-options"> 1975 - 1985 </label>
-									<label id="button_1985_1997" value="1985_1997" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> > 1985 </label>
+									<label id="button_1985_1997" value="1985_1997" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 1985 - 1997 </label>
+									<label id="button_1997_2015" value="1997_2015" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> > 1997 </label>		
 								</div>
 							</div>
 							<div class="col-sm-4 column text-center">			
@@ -142,6 +148,20 @@
 					<div class="col-sm-12 column text-center">
 						<div class="finishButton"></div>
 					</div>
+				</div>
+			</div>
+			
+			<!-- Fourth step - Final Comparison -->
+			<div class="row text-center stepFourElements">
+				<h1 style="color: #575757;">Welke Golf Pro ben jij?</h1>
+				<hr>
+				
+				<div class="col-sm-6 column text-center">
+					<div class="radarChart"></div>
+				</div>
+				
+				<div class="col-sm-6 column text-center">
+					<!--<img style="padding-top: 70px;" width=500 src="img/Deloitte-logo.png"/>-->
 				</div>
 			</div>
 			

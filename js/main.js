@@ -56,6 +56,9 @@ var margin = {top: 30, right: 30, bottom: 30, left: 30},
     width = $(".chartLeft").width() - margin.left - margin.right,
 	height = $(window).height() - margin.top - margin.bottom - 80;
 
+//peer group grey color
+var peerGroupColor = "#9C9C9C";
+
 //Set the button actions in the 2nd screen to define the peer group	
 var peerGroupAge = "1975_1985",
 	peerGroupGender = "Vrouw",
@@ -67,6 +70,7 @@ d3.select("#button_Vrouw").on("click", function(){ peerGroupGender = d3.select("
 d3.select("#button_1950_1975").on("click", function(){ peerGroupAge = d3.select("#button_1950_1975").attr("value"); });
 d3.select("#button_1975_1985").on("click", function(){ peerGroupAge = d3.select("#button_1975_1985").attr("value"); });
 d3.select("#button_1985_1997").on("click", function(){ peerGroupAge = d3.select("#button_1985_1997").attr("value"); });
+d3.select("#button_1997_2015").on("click", function(){ peerGroupAge = d3.select("#button_1997_2015").attr("value"); });
 
 d3.select("#button_0_5").on("click", function(){ peerGroupHandicap = d3.select("#button_0_5").attr("value"); });
 d3.select("#button_5_15").on("click", function(){ peerGroupHandicap = d3.select("#button_5_15").attr("value"); });
@@ -148,12 +152,18 @@ function setupPeergroup() {
 		.style("opacity", 0)
 		.remove();
 		
-	d3.selectAll(".stepOneText").style("display", "none");
+	d3.selectAll(".stepOneText")
+		.transition().duration(750)
+		.style("opacity", 0);
 	
 	setTimeout(function() {
 		d3.selectAll(".stepOneElements").style("display", "none");
 		d3.select(".greenDotWrapper").remove();
-		d3.selectAll(".stepTwoElements").style("display", "block");
+		d3.selectAll(".stepTwoElements")
+			.style("opacity", 0)
+			.style("display", "block")
+			.transition().duration(750)
+			.style("opacity", 1);
 		d3.selectAll(".btn.stepTwoElements").style("display", "inline-block");
 	}, 1000);
 	
@@ -240,3 +250,31 @@ function describeArc(x, y, radius, startAngle, endAngle){
 
     return d;       
 }//describeArc
+
+//Taken from http://bl.ocks.org/mbostock/7555321
+//Wraps SVG text	
+function wrap(text, width) {
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.4, // ems
+        y = text.attr("y"),
+		x = text.attr("x"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+		
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+      }
+    }
+  });
+}//wrap
