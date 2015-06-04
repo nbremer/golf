@@ -363,7 +363,7 @@ function setupVisuals() {
 	heightAoA = 300;
 		
 	//Create axes for the chart
-	//AoAScale = d3.scale.linear().domain([0, 290]).range([0, widthAoA]);
+	AoAScale = d3.scale.linear().domain([-5, 5]).range([30, -30]);
 	//AoAAxis = d3.svg.axis().scale(AoAScale).orient("bottom").tickSize(5).outerTickSize(0).tickFormat(d3.format("d"));
 		
 	//Create SVG
@@ -373,16 +373,46 @@ function setupVisuals() {
 	  .append("g")
 		.attr("class", "AoAWrapper")
 		.attr("transform", "translate(" + (marginAoA.left + widthAoA/2) + "," + (marginAoA.top + heightAoA/2)  + ")");	
+
+	/*//Streamlet
+	AoA.append("path")
+            //.attr("d", "M12.8,20c0,0,413.9,26.4,412.7,0.3S12.8,20,12.8,20z")
+			.attr("d", "M-0.1,17.6c0,0,704.5,15.9,909.6,17.9c34.3,0.3,41.9-8.4,41.5-17.2c-0.4-8.5-11.4-18.9-44.5-17.8C709.5,6.6-0.1,17.6-0.1,17.6z")
+			.attr("transform", "rotate(" + AoAScale(meanAoA) + ") scale(0.2)")
+            .style("fill", "#D3D3D3");*/
 	
+	//Append zero line to chart 
+	AoA.append("line")
+		.attr("x1", 0)
+		.attr("y1", 0)
+		.attr("x2", widthAoA/2)
+		.attr("y2", 0)
+		.style("stroke-dasharray", "3 3")
+		.style("shape-rendering", "crispEdges")
+		.style("stroke", "#D3D3D3");
+		
 	//Place golfball in center
-	var ImageWidth = 40;
+	var ImageWidth = 80;
+	var lineWidth = 2 * ImageWidth;
+	//Append small bar for peer group average
+	AoA.append("line")
+		.attr("class", "meanAoALine")
+		.attr("x1", 0)
+		.attr("y1", 0)
+		.attr("x2", Math.cos(AoAScale(meanAoA) * Math.PI/180) * lineWidth)
+		.attr("y2", Math.sin(AoAScale(meanAoA) * Math.PI/180) * lineWidth)
+		.style("stroke-width", "2")
+		.style("stroke-linecap", "round")
+		.style("stroke", "#D3D3D3");
+	
+	//Golf ball image
 	AoA.append("svg:image")
-		.attr("x", -ImageWidth)
-		.attr("y", -ImageWidth)
+		.attr("x", -ImageWidth/2)
+		.attr("y", -ImageWidth/2)
 		.attr("class", "golfball")
-		.attr("xlink:href", "img/golfball-grey.png")
-		.attr("width", ImageWidth*2)
-		.attr("height", ImageWidth*2)
+		.attr("xlink:href", "img/golfball-grey-white.png")
+		.attr("width", ImageWidth)
+		.attr("height", ImageWidth)
 		.attr("text-anchor", "middle");	
 	
 	var gradientLinear = AoA
@@ -401,13 +431,27 @@ function setupVisuals() {
 		.enter().append("stop") 
 		.attr("offset", function(d) { return d.offset; })   
 		.attr("stop-color", function(d) { return d.color; });
-		
-	//Streamlet
+
+	
+	//Append path for the angle
+	var startValue = meanAoA > 0 ? AoAScale(meanAoA) : 0,
+		endValue = meanAoA > 0 ?  0 : AoAScale(meanAoA);
 	AoA.append("path")
-            //.attr("d","M12.7,25.3c0,0,415.5,36.3,413.1,0C423.5-11,12.7,25.3,12.7,25.3z")
-			.attr("d", "M12.8,20c0,0,413.9,26.4,412.7,0.3S12.8,20,12.8,20z")
-			.attr("transform", "translate(" + (ImageWidth*6/4) + ",0) scale(0.2)")
-            .style("fill", "url(#gradientLinear)");
+			.attr("class", "AoAPath")
+			.attr("x", 0)
+			.attr("y", 0)
+			.attr("d", describeArc(0, 0, lineWidth*0.8, startValue, endValue))
+			.style("stroke-dasharray", "3 3")
+			.style("fill", "none")
+			.style("stroke", "#6B6B6B");	
+	//Append text for the angle number
+	AoA.append("text")
+			.attr("class", "AoAText")
+			.attr("x", 0)
+			.attr("y", 0)
+			.style("fill", "#292929")
+			.text("");
+			
 	////////////////////////////////////////////////////////////// 
 	//////////////// Finished swings Button ////////////////////// 
 	////////////////////////////////////////////////////////////// 

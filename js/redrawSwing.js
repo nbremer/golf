@@ -249,6 +249,76 @@ function redrawSwing(numSwings) {
 		.transition().duration(1000).delay(carryDelay+carryDuration+1000)
 		.style("opacity", 1);
 		
+	////////////////////////////////////////////////////////////// 
+	///////////////////// Angle of Attack //////////////////////// 
+	////////////////////////////////////////////////////////////// 
+
+	var AoADelay = 8000,
+		AoADuration = 1000,
+		lineWidth = 160;
+
+	//Update the exis if needed
+	AoAScale.domain([Math.min(-5, d3.min(subset, function(d) { return d.AttackAngle; })*1.2), Math.max(5, d3.max(subset, function(d) { return d.AttackAngle; })*1.2)]);
+	
+	//Move the mean peer group symbols
+	AoA.selectAll(".meanAoALine")
+		.transition().duration(AoADuration).delay(AoADelay)
+		.attr("x2", Math.cos(AoAScale(meanAoA) * Math.PI/180) * lineWidth)
+		.attr("y2", Math.sin(AoAScale(meanAoA) * Math.PI/180) * lineWidth);
+		
+  	//DATA JOIN
+	//Join new data with old elements, if any
+	var AoAwrapper = AoA.selectAll(".AoALine")
+		.data(subset, function(d) { return d.id; });
+	  
+	//UPDATE
+	AoAwrapper
+		.transition().duration(AoADuration).delay(AoADelay)
+			.style("opacity", 0.5)
+			.style("stroke-width", "2")
+			.attr("x2", function(d) { return Math.cos(AoAScale(d.AttackAngle) * Math.PI/180) * lineWidth; })
+			.attr("y2", function(d) { return Math.sin(AoAScale(d.AttackAngle) * Math.PI/180) * lineWidth; });
+	
+	//ENTER 
+	AoAwrapper
+		.enter().append("line")
+			.attr("class", "AoALine")
+			.attr("x1", 0)
+			.attr("y1", 0)
+			.attr("x2", function(d) { return Math.cos(AoAScale(d.AttackAngle) * Math.PI/180) * lineWidth; })
+			.attr("y2", function(d) { return Math.sin(AoAScale(d.AttackAngle) * Math.PI/180) * lineWidth; })
+			.style("stroke", "url(#gradientLinear)")
+			.style("stroke-linecap", "round")
+			.style("stroke-width", "4")
+			.attr("stroke-dasharray", lineWidth + " " + lineWidth)
+			.attr("stroke-dashoffset", lineWidth)
+			.transition().duration(AoADuration).delay(AoADelay)
+				//.ease("linear")
+				.attr("stroke-dashoffset", 0);
+				
+	//EXIT
+	AoAwrapper.exit().remove();	
+		
+	//Move the golf ball to the front over the lines
+	d3.select(".golfball").moveToFront();
+	
+	
+	var startValue = subset[index].AttackAngle > 0 ? AoAScale(subset[index].AttackAngle) : 0,
+		endValue = subset[index].AttackAngle > 0 ?  0 : AoAScale(subset[index].AttackAngle);
+	//Append path for the angle
+	AoA.select(".AoAPath")
+			.attr("d", describeArc(0, 0, lineWidth*0.9, 0, 0))
+			.transition().duration(1000).delay(AoADelay+AoADuration)
+			.attr("d", describeArc(0, 0, lineWidth*0.9, startValue, endValue));	
+	//Append text for the angle number
+	AoA.select(".AoAText")
+			.style("opacity", 0)
+			.attr("x", function(d) { return Math.cos(AoAScale(subset[index].AttackAngle) * Math.PI/180) * lineWidth + 10; })
+			.attr("y", function(d) { return Math.sin(AoAScale(subset[index].AttackAngle) * Math.PI/180) * lineWidth; })
+			.style("fill", "#292929")
+			.text("Angle of Attack: " + Math.round(subset[index].AttackAngle*100)/100 + "°")
+			.transition().duration(1000).delay(AoADelay+AoADuration+1000)
+			.style("opacity", 1);
 	
 	////////////////////////////////////////////////////////////// 
 	///////////////////////// Finish ///////////////////////////// 

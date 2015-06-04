@@ -1,6 +1,6 @@
 var data = [
     {
-        "AttackAngle": "-4.62",
+        "AttackAngle": "4.62",
         "BallSpeed": "110.1916644",
         "Carry": "125.90",
         "ClubSpeed": "82.431239",
@@ -203,3 +203,40 @@ function setupPeergroup() {
 			.style("opacity", 1);
 
 }//setupPeergroup
+
+///////////////////////////////////////////////////////////
+///////////////// Helper Functions ////////////////////////
+///////////////////////////////////////////////////////////
+
+//Move the element to the front
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+	this.parentNode.appendChild(this);
+  });
+};
+
+//Needed for creation of arc in Angle of Attack
+function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+  var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
+
+  return {
+    x: centerX + (radius * Math.cos(angleInRadians)),
+    y: centerY + (radius * Math.sin(angleInRadians))
+  };
+}//polarToCartesian
+
+//Needed for creation of arc in Angle of Attack
+function describeArc(x, y, radius, startAngle, endAngle){
+
+    var start = polarToCartesian(x, y, radius, endAngle+90);
+    var end = polarToCartesian(x, y, radius, startAngle+90);
+
+    var arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
+
+    var d = [
+        "M", start.x, start.y, 
+        "A", radius, radius, 0, arcSweep, 0, end.x, end.y
+    ].join(" ");
+
+    return d;       
+}//describeArc
