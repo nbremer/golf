@@ -272,7 +272,7 @@ function setupVisuals() {
 	//Margins and dimensions
 	marginCarry = {top: 30, right: 50, bottom: 30, left: 50};
 	widthCarry = $(".chart.carry").width() - marginCarry.left - marginCarry.right - paddingBetween;
-	heightCarry = 300;
+	heightCarry = 240;
 		
 	//Create axes for the chart
 	carryScale = d3.scale.linear().domain([0, 290]).range([0, widthCarry]);
@@ -392,7 +392,7 @@ function setupVisuals() {
 	//Margins and dimensions
 	marginAoA = {top: 30, right: 50, bottom: 30, left: 50};
 	widthAoA = $(".chart.aoa").width() - marginAoA.left - marginAoA.right - paddingBetween;
-	heightAoA = 300;
+	heightAoA = 240;
 
 	var imageWidth = 80;
 	lineLength = 3 * imageWidth;

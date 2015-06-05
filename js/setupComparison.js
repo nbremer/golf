@@ -338,7 +338,7 @@ function setupComparison() {
 	  .style("fill", function(d){ return d;});
 	//Create text next to squares
 	legend.selectAll("text")
-	  .data(["Jij", "Pro", "Referentie groep"])
+	  .data(["Jij", "Pro <<naam>>", "Referentie groep"])
 	  .enter().append("text")
 	  .attr("x", 25)
 	  .attr("y", function(d, i){ return i * 25;})
