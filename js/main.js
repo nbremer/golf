@@ -92,11 +92,13 @@ var svgGreenDot = d3.select(".chartLeft").append("svg")
 	.on("click", setupPeergroup)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-	
+
+//Resize top pading to center the Deloitte logo	
 d3.select(".stepOneText")
 	.style("top", ((height/2 - 200)+"px"))
 	.style("visibility", "visible");
 	
+//Size of the puslating circle
 var circleSize = 50;
 
 //Create the two circles that will pulse

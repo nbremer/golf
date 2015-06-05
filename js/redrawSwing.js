@@ -300,7 +300,6 @@ function redrawSwing(numSwings) {
 			.attr("stroke-dasharray", lineLength + " " + lineLength)
 			.attr("stroke-dashoffset", lineLength)
 			.transition().duration(AoADuration).delay(AoADelay)
-				//.ease("linear")
 				.attr("stroke-dashoffset", 0);
 				
 	//EXIT
