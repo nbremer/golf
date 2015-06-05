@@ -51,6 +51,7 @@ function pulseCircle(wrapper) {
 /////////////// Step 3 - Global variables //////////////////// 
 ////////////////////////////////////////////////////////////// 
 var numSwings = 0; //The swing number we are at	
+var paddingBetween = 0;
 
 var	marginBallSpeed,
 	widthBallSpeed,
@@ -121,7 +122,7 @@ function setupVisuals() {
 	////////////////////////////////////////////////////////////// 
 
 	marginBallSpeed = {top: 30, right: 50, bottom: 30, left: 50};
-	widthBallSpeed = $(".chart.ballSpeed").width() - marginBallSpeed.left - marginBallSpeed.right;
+	widthBallSpeed = $(".chart.ballSpeed").width() - marginBallSpeed.left - marginBallSpeed.right - paddingBetween;
 	heightBallSpeed = 60;
 		
 	//Create axes for the Ball Speed chart
@@ -195,7 +196,7 @@ function setupVisuals() {
 	////////////////////////////////////////////////////////////// 
 
 	marginClubSpeed = {top: 30, right: 50, bottom: 30, left: 50};
-	widthClubSpeed = $(".chart.clubSpeed").width() - marginClubSpeed.left - marginClubSpeed.right;
+	widthClubSpeed = $(".chart.clubSpeed").width() - marginClubSpeed.left - marginClubSpeed.right - paddingBetween;
 	heightClubSpeed = 60;
 		
 	//Create axes for the Club Speed chart
@@ -270,7 +271,7 @@ function setupVisuals() {
 
 	//Margins and dimensions
 	marginCarry = {top: 30, right: 50, bottom: 30, left: 50};
-	widthCarry = $(".chart.carry").width() - marginCarry.left - marginCarry.right;
+	widthCarry = $(".chart.carry").width() - marginCarry.left - marginCarry.right - paddingBetween;
 	heightCarry = 300;
 		
 	//Create axes for the chart
@@ -390,7 +391,7 @@ function setupVisuals() {
 
 	//Margins and dimensions
 	marginAoA = {top: 30, right: 50, bottom: 30, left: 50};
-	widthAoA = $(".chart.aoa").width() - marginAoA.left - marginAoA.right;
+	widthAoA = $(".chart.aoa").width() - marginAoA.left - marginAoA.right - paddingBetween;
 	heightAoA = 300;
 
 	var imageWidth = 80;
