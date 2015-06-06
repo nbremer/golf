@@ -55,13 +55,50 @@ function setupComparison() {
 	d3.select(".golferAttackAngle").text(Math.round(avgs.AttackAngle*100)/100);
 	d3.select(".golferCarry").text(Math.round(avgs.Carry));
 	d3.select(".golferSide").text(Math.round(avgs.Side));
+	
+	
+	////////////////////////////////////////////////////////////// 
+	/////////////////////////// Z-scores ///////////////////////// 
+	////////////////////////////////////////////////////////////// 
+	var golferZscore = [];
+	golferZscore[0] = (avgs.ClubSpeed - meanClubSpeed)/stdClubSpeed; 
+	golferZscore[1] = 	(avgs.BallSpeed - meanBallSpeed)/stdBallSpeed; 
+	golferZscore[2] = 	(avgs.AttackAngle - meanAoA)/stdAoA; 
+	golferZscore[3] = 	(avgs.Carry - meanCarry)/stdCarry; 
+	golferZscore[4] = 	(avgs.Side - meanSide)/stdSide; 
+		
+	////////////////////////////////////////////////////////////// 
+	///////////////////// Euclidian Distance ///////////////////// 
+	////////////////////////////////////////////////////////////// 
+	
+	//Assessor function to the the zScores from the objects
+	function getValue(d) {
+		if ( typeof(d.zScore) === "undefined" ) { return d;}
+		else return d.zScore;
+	}
 
+	//Save the distances between the golfer and the pro
+	var dist = [];
+	for (var i = 0; i < pro.length; i++) {
+		dist[i] = euclidean( golferZscore, pro[i].values, getValue );
+	}//for i
+	console.log(dist);
+	
+	var minLocation = dist.indexOf(Math.min.apply(Math, dist));
+	var welkeProBenJij = pro[minLocation].key;
+	
+	d3.select(".namePro").text(welkeProBenJij);
+	d3.select(".radarChartTitle").text("Vergelijking met " + welkeProBenJij + " en jouw Referentie groep");
+	
+	d3.select(".proAge").text(proAge[minLocation]);
+	d3.select(".proGolfEvent").text("Aantal keer meegedaan aan " + proGolfEvents[minLocation]);
+	d3.select(".proGolfEventNum").text(proGolfEventsNum[minLocation]);
 	////////////////////////////////////////////////////////////// 
 	/////////////////// Initiate Radar chart ///////////////////// 
 	////////////////////////////////////////////////////////////// 
 	
 	var margin = {top: 80, right: 80, bottom: 80, left: 80},
-		width = Math.min(600, $(".radarChart").width(), $(window).height()-515) - margin.left - margin.right,
+		width = Math.min($(".radarChart").width(), $(window).height()-290) - margin.left - margin.right, //$(window).height()-515
 		height = width;
 
 	//Initiate the radar chart SVG
@@ -338,7 +375,7 @@ function setupComparison() {
 	  .style("fill", function(d){ return d;});
 	//Create text next to squares
 	legend.selectAll("text")
-	  .data(["Jij", "Pro <<naam>>", "Referentie groep"])
+	  .data(["Jij", welkeProBenJij, "Referentie groep"])
 	  .enter().append("text")
 	  .attr("x", 25)
 	  .attr("y", function(d, i){ return i * 25;})

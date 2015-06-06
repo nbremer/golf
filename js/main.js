@@ -79,6 +79,12 @@ d3.select("#button_25_36").on("click", function(){ peerGroupHandicap = d3.select
 
 //[peerGroupAge, peerGroupGender, peerGroupHandicap]
 
+//Group the pro data by the name of the pro
+var pro = d3.nest().key(function(d) { return d.Name; }).entries(pro);
+
+var proAge = [29, 24, 23, 19, 27, 29]; //"Joost Luiten", "Daan Huizing", "Robin Kind", "Anne van Dam", "Christel Boeljon", "Dewi Schreefel"
+var proGolfEvents = ["KLM open","KLM open","KLM open","Deloitte Ladies open","Deloitte Ladies open","Deloitte Ladies open"];
+var proGolfEventsNum = [1,2,3,2,1,3];
 ////////////////////////////////////////////////////////////// 
 ///////////////// Step 1 - Pulsating dot ///////////////////// 
 ////////////////////////////////////////////////////////////// 

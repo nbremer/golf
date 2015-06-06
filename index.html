@@ -20,6 +20,8 @@
 
 	<link rel="stylesheet" href="css/style.css">
 	<script src="js/peerGroups.js"></script>
+	<script src="js/pros.js"></script>	
+	<script src="js/euclid.js"></script>
 	<script src="js/setupVisuals.js"></script>
 	<script src="js/redrawSwing.js"></script>
 	<script src="js/setupComparison.js"></script>	
@@ -157,63 +159,67 @@
 				<h1 style="color: #575757;">Welke Golf Pro ben jij?</h1>
 				<hr>
 				
-				<!-- Radar chart and statistics on the left-->
-				<div class="col-sm-6 column text-center">
-					<div class="row text-center">
-						<div class="col-sm-12 column text-center">
-							<h4 style="padding-bottom: 10px;">Mooie titel...</h4>
-							<div class="radarChart"></div>
-						</div>	
-						<div class="col-sm-12 column text-center">
-							<div class="averagesSwing">
-								<h4 style="padding-bottom: 10px;">Gemiddelde van je slagen</h4>
-								<!-- table showing the averages of the swings -->
-								<div style="font-size: 15px; width:100%; height:100%;">
-									<table>
-									  <tr>
-										<td class="name" style="text-align: left;">Ball Speed:</li></td>
-										<td style="text-align: right;"><span class="golferBallSpeed"></span></td>
-										<td style="text-align: left;">miles / hour</td>
-									  </tr>
-									  <tr>
-										<td class="name" style="text-align: left;">Club Speed:</td>
-										<td style="text-align: right;"><span class="golferClubSpeed"></span></td>
-										<td style="text-align: left;">miles / hour</td>
-									  </tr>
-									  <tr>
-										<td class="name" style="text-align: left;">Attack Angle:</td>
-										<td style="text-align: right;"><span class="golferAttackAngle"></span></td>
-										<td style="text-align: left;">°</td>
-									  </tr>
-									  <tr>
-										<td class="name" style="text-align: left;">Carry:</td>
-										<td style="text-align: right;"><span class="golferCarry"></span></td>
-										<td style="text-align: left;">meters</td>
-									  </tr>
-									  <tr>
-										<td class="name" style="text-align: left;">Side:</td>
-										<td style="text-align: right;"><span class="golferSide"></span></td>
-										<td style="text-align: left;">meters</td>
-									  </tr>
-									</table>
-								</div>
-							</div>
-						</div>
+				<!-- Golf pro --> 
+				<div class="col-sm-4 column text-center">
+					<h6 style="padding-bottom: 10px;">Jouw stijl van golfen komt het meest overeen met</h6>
+					<h4 class="namePro" style="padding-bottom: 30px;">Nog niet te meten totdat je minstens 18 bent</h4>
+					<img width=250 src="img/random-golf-image.jpg"/>
+					<div style="font-size: 14px; padding-top: 30px;">
+							<span>Leeftijd</span><br>
+							<span class="proAge" style="font-size: 16px; color: #1A1A1A; font-weight: 400;"></span><br><br>
+							<span class="proGolfEvent"></span><br>
+							<span class="proGolfEventNum" style="font-size: 16px; color: #1A1A1A; font-weight: 400;"></span>
 					</div>
 				</div>
 				
-				<!-- Golf pro on the right --> 
-				<div class="col-sm-6 column text-center">
-					<h6 style="padding-bottom: 10px;">Jouw stijl van golfen komt het meest overeen met</h6>
-					<h4 style="padding-bottom: 30px;">Mister Random Golfer</h4>
-					<img width=250 src="img/random-golf-image.jpg"/>
-					
+				<!-- Radar chart -->
+				<div class="col-sm-4 column text-center">
+					<h4 class="radarChartTitle" style="padding-bottom: 10px;">Vergelijking met jouw golf pro en je referentie groep</h4>
+					<div class="radarChart"></div>
+				</div>
+				
+				<!-- Averages golfer -->
+				<div class="col-sm-4 column text-center">
+					<div class="averagesSwing">
+						<h4 style="padding-bottom: 10px;">Gemiddelde van je slagen</h4>
+						<!-- table showing the averages of the swings -->
+						<div style="font-size: 15px; width:100%; height:100%;">
+							<table>
+							  <tr>
+								<td class="name" style="text-align: left;">Ball Speed:</li></td>
+								<td style="text-align: right;"><span class="golferBallSpeed"></span></td>
+								<td style="text-align: left;">miles / hour</td>
+							  </tr>
+							  <tr>
+								<td class="name" style="text-align: left;">Club Speed:</td>
+								<td style="text-align: right;"><span class="golferClubSpeed"></span></td>
+								<td style="text-align: left;">miles / hour</td>
+							  </tr>
+							  <tr>
+								<td class="name" style="text-align: left;">Attack Angle:</td>
+								<td style="text-align: right;"><span class="golferAttackAngle"></span></td>
+								<td style="text-align: left;">°</td>
+							  </tr>
+							  <tr>
+								<td class="name" style="text-align: left;">Carry:</td>
+								<td style="text-align: right;"><span class="golferCarry"></span></td>
+								<td style="text-align: left;">meters</td>
+							  </tr>
+							  <tr>
+								<td class="name" style="text-align: left;">Side:</td>
+								<td style="text-align: right;"><span class="golferSide"></span></td>
+								<td style="text-align: left;">meters</td>
+							  </tr>
+							</table>
+						</div>
+					</div>
 					<div style="padding-top: 70px;">
 						<h6 style="padding-bottom: 10px;">Made possible by</h6>
 						<img width=200 src="img/Deloitte-logo.png"/>
 						<img width=200 src="img/Trackman-logo.png"/>
 					</div>
 				</div>
+				
 			</div>
 			
 		</div>

@@ -87,7 +87,12 @@ var chosenPeerGroup,
 	meanAoA = 0,
 	meanCarry = 0,
 	meanSide = 0,
-	meanTriangle = 0;
+	meanTriangle = 0,
+	stdClubSpeed = 0,
+	stdBallSpeed = 0,
+	stdAoA = 0,
+	stdCarry = 0,
+	stdSide = 0;
 	
 	
 //Set up all the 4 charts (without any data shown yet)
@@ -115,6 +120,12 @@ function setupVisuals() {
 		meanCarry = chosenPeerGroup[3].Mean;
 		meanSide = chosenPeerGroup[4].Mean;
 		meanTriangle = Math.sqrt(meanCarry*meanCarry - meanSide*meanSide);
+		
+		stdClubSpeed = chosenPeerGroup[0].StdDev;
+		stdBallSpeed = chosenPeerGroup[1].StdDev;
+		stdAoA = chosenPeerGroup[2].StdDev;
+		stdCarry = chosenPeerGroup[3].StdDev;
+		stdSide = chosenPeerGroup[4].StdDev;
 	}//if
 			
 	////////////////////////////////////////////////////////////// 
