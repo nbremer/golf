@@ -1,19 +1,19 @@
 var data = [
     {
         "AttackAngle": "4.62",
-        "BallSpeed": "110.1916644",
+        "BallSpeed": "48.1916644",
         "Carry": "125.90",
-        "ClubSpeed": "82.431239",
-        "Side": "-2.99",
+        "ClubSpeed": "48.431239",
+        "Side": "-12.99",
         "Time": "2015-05-21 13:35:28.534746",
         "UID": "7ed5f514-3abb-43ed-9a25-174cd636f180",
         "id": 1
     },
     {
         "AttackAngle": "-4.94",
-        "BallSpeed": "125.0010854",
-        "Carry": "137.46",
-        "ClubSpeed": "75",
+        "BallSpeed": "68.0010854",
+        "Carry": "80.46",
+        "ClubSpeed": "33",
         "Side": "8.95",
         "Time": "2015-05-21 13:35:37.533967",
         "UID": "7ed5f514-3abb-43ed-9a25-174cd636f180",
@@ -21,9 +21,9 @@ var data = [
     },
     {
         "AttackAngle": "3.05",
-        "BallSpeed": "90",
-        "Carry": "60.56",
-        "ClubSpeed": "93.4",
+        "BallSpeed": "55",
+        "Carry": "175.56",
+        "ClubSpeed": "41.4",
         "Side": "12.43",
         "Time": "2015-05-21 13:35:40",
         "UID": "7ed5f514-3abb-43ed-9a25-174cd636f180",
@@ -31,8 +31,8 @@ var data = [
     },
     {
         "AttackAngle": "1.23",
-        "BallSpeed": "155.43",
-        "Carry": "186.93",
+        "BallSpeed": "32.43",
+        "Carry": "168.93",
         "ClubSpeed": "45.64",
         "Side": "3.24",
         "Time": "2015-05-21 13:35:42",
@@ -42,9 +42,9 @@ var data = [
     {
         "AttackAngle": "-2.45",
         "BallSpeed": "40.76",
-        "Carry": "250.44",
-        "ClubSpeed": "110.34",
-        "Side": "34.35",
+        "Carry": "134.44",
+        "ClubSpeed": "28.34",
+        "Side": "20.35",
         "Time": "2015-05-21 13:35:44",
         "UID": "7ed5f514-3abb-43ed-9a25-174cd636f180",
         "id": 5

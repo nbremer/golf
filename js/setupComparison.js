@@ -2,6 +2,9 @@
 ////////////// Step 4 - Final Comparison ///////////////////// 
 ////////////////////////////////////////////////////////////// 
 
+var radarData,
+	maxRadarValue;
+	
 function moveThreeToFour() {
 
 	//Decrease size, decrease opacity then remove
@@ -84,21 +87,61 @@ function setupComparison() {
 	}//for i
 	console.log(dist);
 	
-	var minLocation = dist.indexOf(Math.min.apply(Math, dist));
+	var minLocation = 2;//dist.indexOf(Math.min.apply(Math, dist));
 	var welkeProBenJij = pro[minLocation].key;
-	
+
+	//Adjust the texts to the most similar golfer	
 	d3.select(".namePro").text(welkeProBenJij);
-	d3.select(".radarChartTitle").text("Vergelijking met " + welkeProBenJij + " en jouw Referentie groep");
-	
+	d3.select(".radarChartTitle").text("Jouw gemiddeldes vergeleken met " + welkeProBenJij + "");
 	d3.select(".proAge").text(proAge[minLocation]);
 	d3.select(".proGolfEvent").text("Aantal keer meegedaan aan " + proGolfEvents[minLocation]);
 	d3.select(".proGolfEventNum").text(proGolfEventsNum[minLocation]);
+	
+	//Change the image of the Pro golfer
+	d3.select(".ProImage").attr("src", "img/" + welkeProBenJij + ".jpg");
+	//Adjust the width of the image
+	var imgWidth = $('.namePro').width() - 150;
+	$('.ProImage').attr('width', imgWidth);
+	
+	//Save the values of the most similar pro in a variable for easy use
+	var proValues = pro[minLocation].values;
+
+	////////////////////////////////////////////////////////////// 
+	////////////////////////// Data ////////////////////////////// 
+	////////////////////////////////////////////////////////////// 
+	
+	radarData = [
+		[//Average
+			{axis:'Ball Speed', value: 0},
+			{axis:'Club Speed', value: 0},
+			{axis:'Carry', value: 0},
+			{axis:'Side', value: 0},
+			{axis:'Attack Angle', value: 0}
+		],
+		[//Pro
+			{axis:'Ball Speed', value: proValues[1].zScore},
+			{axis:'Club Speed', value: proValues[0].zScore},
+			{axis:'Carry', value: proValues[3].zScore},
+			{axis:'Side', value: proValues[4].zScore},
+			{axis:'Attack Angle', value: proValues[2].zScore}
+		],
+		[//Golfer
+			{axis:'Ball Speed', value: golferZscore[1]},
+			{axis:'Club Speed', value: golferZscore[0]},
+			{axis:'Carry', value: golferZscore[3]},
+			{axis:'Side', value: golferZscore[4]},
+			{axis:'Attack Angle', value: golferZscore[2]}
+		]	
+	];
+	
+	//Find the largest deviation from the mean for the max of the axis
+	maxRadarValue = Math.max(d3.max(radarData[1], function(d){return Math.abs(d.value); }), d3.max(golferZscore)) ;
 	////////////////////////////////////////////////////////////// 
 	/////////////////// Initiate Radar chart ///////////////////// 
 	////////////////////////////////////////////////////////////// 
 	
 	var margin = {top: 80, right: 80, bottom: 80, left: 80},
-		width = Math.min($(".radarChart").width(), $(window).height()-290) - margin.left - margin.right, //$(window).height()-515
+		width = Math.min($(".radarChart").width(), $(window).height()-405) - margin.left - margin.right, //$(window).height()-515 //290
 		height = width;
 
 	//Initiate the radar chart SVG
@@ -171,6 +214,7 @@ function setupComparison() {
 		
 		//The background circles as the grid
 		var levelFactor = cfg.factor*radius/cfg.levels;
+		console.log(levelFactor);
 		var backgroundColors;
 		g.selectAll(".levels")
 		   .data(d3.range(1,(cfg.levels+1)).reverse())
@@ -230,8 +274,8 @@ function setupComparison() {
 			g.selectAll(".nodes")
 				.data(y, function(j, i){
 				  dataValues.push([
-					cfg.w/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)), 
-					cfg.h/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
+					cfg.w/2*(1-(parseFloat(Math.max(j.value+cfg.maxValue/2, 0))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)), 
+					cfg.h/2*(1-(parseFloat(Math.max(j.value+cfg.maxValue/2, 0))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
 				  ]);
 				});
 			//Create the blobs	
@@ -279,13 +323,13 @@ function setupComparison() {
 				.attr("alt", function(j){return Math.max(j.value, 0)})
 				.attr("cx", function(j, i){
 					dataValues.push([
-						cfg.w/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)), 
-						cfg.h/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
+						cfg.w/2*(1-(parseFloat(Math.max(j.value+cfg.maxValue/2, 0))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)), 
+						cfg.h/2*(1-(parseFloat(Math.max(j.value+cfg.maxValue/2, 0))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
 					]);
-					return cfg.w/2*(1-(Math.max(j.value, 0)/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total));
+					return cfg.w/2*(1-(Math.max(j.value+cfg.maxValue/2, 0)/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total));
 				})
 				.attr("cy", function(j, i){
-					return cfg.h/2*(1-(Math.max(j.value, 0)/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total));
+					return cfg.h/2*(1-(Math.max(j.value+cfg.maxValue/2, 0)/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total));
 				})
 				.attr("data-id", function(j){return j.axis})
 				.style("fill", function(d) {
@@ -301,35 +345,6 @@ function setupComparison() {
 	};//RadarChart
 			
 	////////////////////////////////////////////////////////////// 
-	////////////////////////// Data ////////////////////////////// 
-	////////////////////////////////////////////////////////////// 
-
-	//The factor analysis values resulting from the SOM segments
-	var somCAPs = [
-		[//frontrunners
-			{axis:'Ball Speed', value:5.5},
-			{axis:'Club Speed', value:4.9},
-			{axis:'Carry', value:5.3},
-			{axis:'Side', value:3.4},
-			{axis:'Attack Angle', value:6.3}
-		],
-		[//observers
-			{axis:'Ball Speed', value:4.6},
-			{axis:'Club Speed', value:6.2},
-			{axis:'Carry', value:4.5},
-			{axis:'Side', value:4.5},
-			{axis:'Attack Angle', value:2.3}
-		],
-		[//defensive line
-			{axis:'Ball Speed', value:2.3},
-			{axis:'Club Speed', value:2.7},
-			{axis:'Carry', value:4.0},
-			{axis:'Side', value:5.1},
-			{axis:'Attack Angle', value:4.8}
-		]	
-	];
-
-	////////////////////////////////////////////////////////////// 
 	/////////// Call the creation of the radar chart ///////////// 
 	////////////////////////////////////////////////////////////// 
 
@@ -339,8 +354,8 @@ function setupComparison() {
 	  w: width,
 	  h: height,
 	  margin: margin,
-	  maxValue: 7,
-	  levels: 7,
+	  maxValue: maxRadarValue*2*1.2,
+	  levels: 6,
 	  factorLegendX: 0.9,
 	  factorLegendY: 1,
 	  opacityArea: 0.35,
@@ -349,7 +364,7 @@ function setupComparison() {
 	  color: function(d){return color[d];}
 	};
 	//Call function to draw the Radar chart
-	RadarChart.draw(".radarChart", somCAPs, radarChartOptions);
+	RadarChart.draw(".radarChart", radarData, radarChartOptions);
 
 	////////////////////////////////////////////////////////////// 
 	////////////////////// Make a legend ///////////////////////// 
@@ -375,7 +390,7 @@ function setupComparison() {
 	  .style("fill", function(d){ return d;});
 	//Create text next to squares
 	legend.selectAll("text")
-	  .data(["Jij", welkeProBenJij, "Referentie groep"])
+	  .data(["Jij", welkeProBenJij, "Gemiddelde van Referentie groep"])
 	  .enter().append("text")
 	  .attr("x", 25)
 	  .attr("y", function(d, i){ return i * 25;})

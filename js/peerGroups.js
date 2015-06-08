@@ -122,7 +122,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1985_1997",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "ClubSpeed",
     "Mean": 42.94535535,
     "StdDev": 3.910208583
@@ -130,7 +130,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1985_1997",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "BallSpeed",
     "Mean": 61.56799945,
     "StdDev": 7.848005973
@@ -138,7 +138,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1985_1997",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "AttackAngle",
     "Mean": -2.597360204,
     "StdDev": 2.710359458
@@ -146,7 +146,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1985_1997",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "Carry",
     "Mean": 180.0693601,
     "StdDev": 38.28678705
@@ -154,7 +154,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1985_1997",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "Side",
     "Mean": 17.87124614,
     "StdDev": 14.38797058
@@ -282,7 +282,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1975_1985",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "ClubSpeed",
     "Mean": 43.37417204,
     "StdDev": 3.378642284
@@ -290,7 +290,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1975_1985",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "BallSpeed",
     "Mean": 49.65657882,
     "StdDev": 6.13424155
@@ -298,7 +298,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1975_1985",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "AttackAngle",
     "Mean": -1.43651992,
     "StdDev": 2.774566843
@@ -306,7 +306,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1975_1985",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "Carry",
     "Mean": 180.6094409,
     "StdDev": 33.53756578
@@ -314,7 +314,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1975_1985",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "Side",
     "Mean": 16.09185099,
     "StdDev": 13.19350147
@@ -442,7 +442,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1950_1975",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "ClubSpeed",
     "Mean": 40.07966667,
     "StdDev": 3.938291401
@@ -450,7 +450,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1950_1975",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "BallSpeed",
     "Mean": 56.55265579,
     "StdDev": 7.70107123
@@ -458,7 +458,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1950_1975",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "AttackAngle",
     "Mean": -1.420679763,
     "StdDev": 3.261742761
@@ -466,7 +466,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1950_1975",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "Carry",
     "Mean": 169.8350699,
     "StdDev": 40.28294807
@@ -474,7 +474,7 @@ var peerGroup = [
 {
     "Gender": "Man",
     "Age": "1950_1975",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "Side",
     "Mean": 17.10969686,
     "StdDev": 12.93329162
@@ -602,7 +602,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1985_1997",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "ClubSpeed",
     "Mean": 37.08443379,
     "StdDev": 3.556704913
@@ -610,7 +610,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1985_1997",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "BallSpeed",
     "Mean": 53.45049018,
     "StdDev": 7.742842811
@@ -618,7 +618,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1985_1997",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "AttackAngle",
     "Mean": -0.88174745,
     "StdDev": 3.299302688
@@ -626,7 +626,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1985_1997",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "Carry",
     "Mean": 152.0871299,
     "StdDev": 35.56459756
@@ -634,7 +634,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1985_1997",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "Side",
     "Mean": 11.53896789,
     "StdDev": 9.068250009
@@ -762,7 +762,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1975_1985",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "ClubSpeed",
     "Mean": 32.89514624,
     "StdDev": 0.530121855
@@ -770,7 +770,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1975_1985",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "BallSpeed",
     "Mean": 49.88184763,
     "StdDev": 0.803623357
@@ -778,7 +778,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1975_1985",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "AttackAngle",
     "Mean": -1.062291582,
     "StdDev": 0.700651468
@@ -786,7 +786,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1975_1985",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "Carry",
     "Mean": 137.986895,
     "StdDev": 4.624748844
@@ -794,7 +794,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1975_1985",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "Side",
     "Mean": 7.916215595,
     "StdDev": 3.263450299
@@ -922,7 +922,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1950_1975",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "ClubSpeed",
     "Mean": 32.40324429,
     "StdDev": 3.56596932
@@ -930,7 +930,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1950_1975",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "BallSpeed",
     "Mean": 45.66938869,
     "StdDev": 7.205577206
@@ -938,7 +938,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1950_1975",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "AttackAngle",
     "Mean": -0.358203929,
     "StdDev": 2.39060735
@@ -946,7 +946,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1950_1975",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "Carry",
     "Mean": 118.3989287,
     "StdDev": 35.838755
@@ -954,7 +954,7 @@ var peerGroup = [
 {
     "Gender": "Vrouw",
     "Age": "1950_1975",
-    "Handicap": "25 _36",
+    "Handicap": "25_36",
     "Measure": "Side",
     "Mean": 12.32312377,
     "StdDev": 8.184431323
