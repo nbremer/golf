@@ -542,5 +542,33 @@ function setupVisuals() {
 			.style("opacity", 0)
 			.transition().duration(1000)
 			.style("opacity", 1);
+
+	////////////////////////////////////////////////////////////// 
+	/////////////////// Peer Group Legend //////////////////////// 
+	////////////////////////////////////////////////////////////// 
 	
+	//Create SVG
+	var svgPeerGroupLegend = d3.select(".peerGroupLegend").append("svg")
+		.attr("width", $(".peerGroupLegend").width())
+		.attr("height", heightCircle)
+		.attr("class", "peerGroupLegendSVG")
+	  .append("g")
+		.attr("transform", "translate(" + 30 + "," + heightCircle/2 + ")");
+	  
+	var rectWidth = 16;
+	svgPeerGroupLegend.append("rect")
+		.attr("x", 0)
+		.attr("y", -rectWidth/2)
+		.attr("width", rectWidth)
+		.attr("height", rectWidth)
+		.style("fill", peerGroupColor);
+		
+	svgPeerGroupLegend.append("text")
+		.attr("x", rectWidth+12)
+		.attr("y", -rectWidth/2)
+		.attr("dy", "1em")
+		.style("font-size", "12px")
+		.text("Gemiddelde van jouw referentie groep");
+		
+		
 }//setupVisuals
