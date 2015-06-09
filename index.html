@@ -70,7 +70,7 @@
 									<label id="button_1950_1975" value="1950_1975" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> < 1975 </label>
 									<label id="button_1975_1985" value="1975_1985" class="btn btn-default active btn-xlarge"><input type="radio" class="btn-options"> 1975 - 1985 </label>
 									<label id="button_1985_1997" value="1985_1997" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 1985 - 1997 </label>
-									<label id="button_1997_2015" value="1997_2015" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> > 1997 </label>		
+									<!--<label id="button_1997_2015" value="1997_2015" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> > 1997 </label>-->
 								</div>
 							</div>
 							<div class="col-sm-4 column text-center">			
@@ -147,8 +147,14 @@
 					</div>					
 					
 					<div class="row text-center">
-						<div class="col-sm-12 column text-center">
+						<div class="col-sm-3 column text-center">
+							<div class="peerGroupLegend" style="padding-top: 20px;"></div>
+						</div>
+						<div class="col-sm-6 column text-center">
 							<div class="finishButton" style="padding-top: 20px;"></div>
+						</div>
+						<div class="col-sm-3 column text-center">
+							<div></div>
 						</div>
 					</div>
 				</div>
@@ -161,9 +167,9 @@
 				
 				<!-- Golf pro --> 
 				<div class="col-sm-4 column text-center">
-					<h6 style="padding-bottom: 10px;">Jouw stijl van golfen komt het meest overeen met</h6>
-					<h4 class="namePro" style="padding-bottom: 30px;">Nog niet te meten totdat je minstens 18 bent</h4>
-					<img class="ProImage" width=250 src="img/random-golf-image.jpg"/>
+					<h4 style="padding-bottom: 10px;">Jouw swing komt het meest overeen met die van</h4>
+					<h3 class="namePro" style="padding-bottom: 30px; font-weight: 400;">Nog niet te meten totdat je minstens 18 bent</h3>
+					<img class="ProImage" width=250 src=""/>
 					<div class="golfProStats" style="font-size: 14px; padding-top: 30px;">
 							<span>Leeftijd</span><br>
 							<span class="proAge" style="font-size: 16px; color: #1A1A1A; font-weight: 400;"></span><br><br>
@@ -176,15 +182,17 @@
 				<div class="col-sm-4 column text-center">
 					<h4 class="radarChartTitle">Vergelijking met jouw golf pro</h4>
 					<div class="radarChart"></div>
-					<div class="explanation" style="padding-top: 25px; color: #404040;">Hierboven zie je jouw scores (in het groen) ten opzichte van jouw gekozen referentie groep
-											 en de Golf Pro op wie jouw stijl van golfen het meeste lijkt (in het blauw) ten opzichte van diens referentie groep (andere Pro golfers).
-											 De referentie groepen van jouw en de Pro zijn allebei weergeven in het grijs (deze ligt door de normalisatie altijd als bijna cirkel in het midden)</div>
+					<div class="explanation" style="padding-top: 25px; color: #404040;">
+						<span>Hierboven zie je <span style="color:#81bc00; font-weight: 400;">jouw scores</span> ten opzichte van de 
+						<span style="color:#004a95; font-weight: 400;">Golf Pro</span> op wiens swing die van jou het meeste lijkt.</span><br>
+						De gemiddelde scores van jouw referentiegroep en de referentiegroep van de Pro zijn allebei weergeven met de donkergrijze lijn. 
+						Omdat dit standaardscores zijn ligt de grijze lijn als cirkel in het midden.</div>
 				</div>
 				
 				<!-- Averages golfer -->
 				<div class="col-sm-4 column text-center">
 					<div class="averagesSwing">
-						<h4 style="padding-bottom: 10px;">Gemiddelde van je slagen</h4>
+						<h4 style="padding-bottom: 10px;">Jouw gemiddelde score</h4>
 						<!-- table showing the averages of the swings -->
 						<div style="font-size: 15px; width:100%; height:100%;">
 							<table>
@@ -216,8 +224,17 @@
 							</table>
 						</div>
 					</div>
-					<div style="padding-top: 70px;">
-						<h6 style="padding-bottom: 10px;">Made possible by</h6>
+					<div class="improvements">
+						<h4 style="padding-top:25px;">Jouw sterke punten</h4>
+						<div style="padding-bottom: 10px; font-size: 12px; color: #C4C4C4;">Ten opzichte van jouw referentiegroep scoor je beter op</div>
+						<div class="strongPoints" style="font-size: 15px;"></div>
+						<h4 style="padding-top:25px;">Jouw verbeterpunten</h4>
+						<div style="padding-bottom: 10px; font-size: 12px; color: #C4C4C4;">Ten opzichte van jouw referentiegroep scoor je minder goed op</div>
+						<div class="weakPoints" style="font-size: 15px;"></div>
+					</div>
+					<div style="padding-top: 20px;">
+						<hr>
+						<h6 style="padding-bottom: 5px;">Made possible by</h6>
 						<img width=200 src="img/Deloitte-logo.png"/>
 						<img width=200 src="img/Trackman-logo.png"/>
 					</div>

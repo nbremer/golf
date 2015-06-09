@@ -70,7 +70,7 @@ d3.select("#button_Vrouw").on("click", function(){ peerGroupGender = d3.select("
 d3.select("#button_1950_1975").on("click", function(){ peerGroupAge = d3.select("#button_1950_1975").attr("value"); });
 d3.select("#button_1975_1985").on("click", function(){ peerGroupAge = d3.select("#button_1975_1985").attr("value"); });
 d3.select("#button_1985_1997").on("click", function(){ peerGroupAge = d3.select("#button_1985_1997").attr("value"); });
-d3.select("#button_1997_2015").on("click", function(){ peerGroupAge = d3.select("#button_1997_2015").attr("value"); });
+//d3.select("#button_1997_2015").on("click", function(){ peerGroupAge = d3.select("#button_1997_2015").attr("value"); });
 
 d3.select("#button_0_5").on("click", function(){ peerGroupHandicap = d3.select("#button_0_5").attr("value"); });
 d3.select("#button_5_15").on("click", function(){ peerGroupHandicap = d3.select("#button_5_15").attr("value"); });
@@ -112,26 +112,47 @@ svgGreenDot.selectAll(".pulseCircle")
 			.data([0,1]).enter()
 			.append("circle")
 			.attr("class", "pulseCircle")
-			.attr("r", circleSize)
+			.attr("r", circleSize*0.8)
 			.attr("cx", width / 2)
 			.attr("cy", height / 2)
 			.style("fill", "#81BC00")
-			.each(pulse);
+			.transition().duration(1500).delay(function(d,i) { return i*500; })
+			.attr("r", circleSize*1.75)
+			.style("opacity", 0.3)
+			.each(doPulse);
 
+function doPulse() {
+	d3.select(this)
+		.transition()
+		.duration(1500)
+		.attr("r", circleSize*1.75)
+		.attr("opacity", 0.3)
+		.each("end", function() {
+			d3.select(this)
+				.transition()
+				.duration(1500)
+				.delay(function(d,i) { return i*500; })
+				.attr("r", circleSize*0.8)
+				.attr("opacity", 1)
+				.each("end", doPulse);
+		});
+};
+
+/* //Old pulse
 function pulse() {
 	var circle = svgGreenDot.selectAll(".pulseCircle");
 	(function repeat() {
 		circle.transition()
-			.duration(1500).delay(function(d,i) {return i*500;})
+			.duration(1500)
 			.attr("r", circleSize*0.8)
 			.style("opacity", 0.9)
-		
-		circle.transition().duration(1500).delay(function(d,i) {return 1500; })
-			.attr("r", circleSize*1.75)
+		.transition().duration(1500).delay(1500)
+			.attr("r", circleSize*2)
 			.style("opacity", 0.2)
 			.each("end", repeat);
 	})();
 }//pulse
+*/
 
 //One steady circle in the center
 var circleCenter = svgGreenDot.append("circle")
