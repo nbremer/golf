@@ -1,3 +1,46 @@
+/*Dowloaded from http://www.localfont.com/*/
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 300;
+  font-style: normal;
+  src: url('../fonts/Open-Sans-300/Open-Sans-300.eot');
+  src: url('../fonts/Open-Sans-300/Open-Sans-300.eot?#iefix') format('embedded-opentype'),
+       local('Open Sans Light'),
+       local('Open-Sans-300'),
+       url('../fonts/Open-Sans-300/Open-Sans-300.woff2') format('woff2'),
+       url('../fonts/Open-Sans-300/Open-Sans-300.woff') format('woff'),
+       url('../fonts/Open-Sans-300/Open-Sans-300.ttf') format('truetype'),
+       url('../fonts/Open-Sans-300/Open-Sans-300.svg#OpenSans') format('svg');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../fonts/Open-Sans-regular/Open-Sans-regular.eot');
+  src: url('../fonts/Open-Sans-regular/Open-Sans-regular.eot?#iefix') format('embedded-opentype'),
+       local('Open Sans'),
+       local('Open-Sans-regular'),
+       url('../fonts/Open-Sans-regular/Open-Sans-regular.woff2') format('woff2'),
+       url('../fonts/Open-Sans-regular/Open-Sans-regular.woff') format('woff'),
+       url('../fonts/Open-Sans-regular/Open-Sans-regular.ttf') format('truetype'),
+       url('../fonts/Open-Sans-regular/Open-Sans-regular.svg#OpenSans') format('svg');
+}
+
+@font-face {
+  font-family: 'Raleway';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../fonts/Raleway-regular/Raleway-regular.eot');
+  src: url('../fonts/Raleway-regular/Raleway-regular.eot?#iefix') format('embedded-opentype'),
+       local('Raleway'),
+       local('Raleway-regular'),
+       url('../fonts/Raleway-regular/Raleway-regular.woff2') format('woff2'),
+       url('../fonts/Raleway-regular/Raleway-regular.woff') format('woff'),
+       url('../fonts/Raleway-regular/Raleway-regular.ttf') format('truetype'),
+       url('../fonts/Raleway-regular/Raleway-regular.svg#Raleway') format('svg');
+}
+
 body {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 11px;
@@ -10,14 +53,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-	/*font-family: 'Montserrat', sans-serif;*/
 	font-family: 'Raleway', sans-serif;
 	font-size: 46px;
 }
 
-.montserrat {
-	font-family: 'Montserrat', sans-serif;
-}
 .raleway {
 	font-family: 'Raleway', sans-serif;
 }
