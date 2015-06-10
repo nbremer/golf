@@ -47,7 +47,7 @@ function setupComparison() {
 				BallSpeed: d3.mean(d,function(g) {return g.BallSpeed;}),
 				Carry: d3.mean(d,function(g) {return g.Carry;}),
 				ClubSpeed: d3.mean(d,function(g) {return g.ClubSpeed;}),
-				Side: d3.mean(d,function(g) {return g.Side;})
+				Side: d3.mean(d,function(g) {return Math.abs(g.Side);}) //Adjusted
 			}
 		})
 		.entries(data);	
@@ -69,6 +69,7 @@ function setupComparison() {
 	golferZscore[3] = 	(avgs.Carry - meanCarry)/stdCarry; 
 	golferZscore[4] = 	(avgs.Side - meanSide)/stdSide; 
 	
+	//Find out which of the 6 stats are above and below average and append them to the right string
 	var strongPointsString = "",
 		weakPointsString = ""
 	if (golferZscore[0] >= 0) strongPointsString = strongPointsString.concat("Club Speed, ");
@@ -85,8 +86,7 @@ function setupComparison() {
 	strongPointsString = strongPointsString.substring(0, strongPointsString.length - 2);
 	weakPointsString = weakPointsString.substring(0, weakPointsString.length - 2);
 	
-	console.log(strongPointsString);
-	console.log(weakPointsString);
+	//Paste the strings into the website
 	d3.select(".strongPoints").html(strongPointsString);
 	d3.select(".weakPoints").html(weakPointsString);
 	
