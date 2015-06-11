@@ -18,6 +18,18 @@ function moveThreeToFour() {
 	d3.selectAll(".stepThreeElements")
 		.transition().duration(750)
 		.style("opacity", 0);
+		
+	////////////////////////////// Adjusted ////////////////////////////
+	d3.select(".titleScore").text("Jouw gemiddelde score uit " + numSwings + " slagen");
+	
+	//Adjust the numbers on the screen
+	d3.select(".peerBallSpeed").text(Math.round(meanBallSpeed));
+	d3.select(".peerClubSpeed").text(Math.round(meanClubSpeed));
+	d3.select(".peerAttackAngle").text(Math.round(meanAoA*100)/100);
+	d3.select(".peerCarry").text(Math.round(meanCarry));
+	d3.select(".peerSide").text(Math.round(meanSide));
+	
+	////////////////////////////////////////////////////////////////////
 	
 	//Hide previous section and display the swing visuals
 	setTimeout(function(d) {

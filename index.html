@@ -51,10 +51,10 @@
 			<!-- Second step - Find Peer group -->
 			<div class="row text-center stepTwoElements">	
 				<div class="col-sm-12 column text-center">
-					<div class="row text-center">
-						<h1>Bepaal je Referentiegroep</h1>
-						<hr>
-						
+					<h1>Bepaal je Referentiegroep</h1> <!-- adjusted -->
+					<hr>	<!-- adjusted -->
+					
+					<div class="row text-center definePeerGroup">	<!-- adjusted --> 					
 						<div class="col-sm-12 column text-center">					
 							<div class="col-sm-4 column text-center">						
 								<h3 style="padding-bottom: 10px; padding-top: 10px;">Geslacht</h3>
@@ -86,7 +86,7 @@
 					
 					<div style="height: 100px;"></div>
 					
-					<div class="row text-center">
+					<div class="row text-center defineSocialMedia"> <!-- adjusted -->
 						<span style="font-size: 13px;">Wilt u de resultaten ook graag per e-mail ontvangen of delen via Twitter, vul dan hieronder uw gegevens in</span>
 						<div style="height: 20px;"></div>
 						<div class="col-sm-3 col-sm-offset-2 column text-center">
@@ -109,19 +109,21 @@
 					
 					<div style="height: 50px;"></div>
 					
-					<div class="row text-center">
+					<div class="row text-center defineButton"> <!-- adjusted -->
 						<div class="col-sm-12 column text-center">
 							<div class="submitButton" style="padding-top: 20px;"></div>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 			
 			<!-- Third step - Hitting charts -->
 			<div class="row text-center stepThreeElements">	
-				<div class="col-sm-12 column text-center">
-					<h1 class="stepThreeTitle">Klaar voor slag 1</h1>
-					<hr>
+				<h1 class="stepThreeTitle">Klaar voor slag 1</h1> <!-- adjusted -->
+				<hr> <!-- adjusted -->
+				
+				<div class="col-sm-12 column text-center defineSwingCharts"> <!-- adjusted -->
 					
 					<div class="row text-center">
 						<div class="col-sm-6 column text-center">
@@ -181,48 +183,64 @@
 				<div class="col-sm-4 column text-center">
 					<h4 class="radarChartTitle">Vergelijking met jouw golf pro</h4>
 					<div class="radarChart"></div>
-					<div class="explanation" style="padding-top: 25px; color: #404040;">
+					<div class="explanation" style="padding-top: 25px; color: #404040; font-size: 12px"> <!-- adjusted -->
 						<span>Hierboven zie je <span style="color:#81bc00; font-weight: 400;">jouw scores</span> ten opzichte van de 
 						<span style="color:#004a95; font-weight: 400;">Golf Pro</span> op wiens swing die van jou het meeste lijkt.</span><br>
 						De gemiddelde scores van jouw referentiegroep en de referentiegroep van de Pro zijn allebei weergeven met de donkergrijze lijn. 
 						Omdat dit standaardscores zijn ligt de grijze lijn als cirkel in het midden.</div>
 				</div>
 				
-				<!-- Averages golfer -->
+				<!-- Averages golfer --> <!-- adjusted -->
 				<div class="col-sm-4 column text-center">
 					<div class="averagesSwing">
-						<h4 style="padding-bottom: 10px;">Jouw gemiddelde score</h4>
+						<h4 class="titleScore" style="padding-bottom: 15px;">Jouw gemiddelde score</h4>
 						<!-- table showing the averages of the swings -->
 						<div style="font-size: 15px; width:100%; height:100%;">
 							<table>
+							   <tr>
+								<td class="name" style="text-align: right;"></td>
+								<td class="tableTitle" colspan = "2">Jouw Scores</td>
+								<td class="tableTitle" colspan = "2" style="padding-left: 30px;">Referentiegroep</td>
+							  </tr>
 							  <tr>
-								<td class="name" style="text-align: left;">Ball Speed:</li></td>
+								<td class="name" style="text-align: left;">Ball Speed:</td>
 								<td style="text-align: right;"><span class="golferBallSpeed"></span></td>
 								<td style="text-align: left;">miles / hour</td>
+								<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerBallSpeed"></span></td>
+								<td style="text-align: left; font-size: 11px;">miles / hour</td>
 							  </tr>
 							  <tr>
 								<td class="name" style="text-align: left;">Club Speed:</td>
 								<td style="text-align: right;"><span class="golferClubSpeed"></span></td>
 								<td style="text-align: left;">miles / hour</td>
+								<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerClubSpeed"></span></td>
+								<td style="text-align: left; font-size: 11px;">miles / hour</td>
 							  </tr>
 							  <tr>
 								<td class="name" style="text-align: left;">Attack Angle:</td>
 								<td style="text-align: right;"><span class="golferAttackAngle"></span></td>
 								<td style="text-align: left;">°</td>
+								<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerAttackAngle"></span></td>
+								<td style="text-align: left; font-size: 11px;">°</td>
 							  </tr>
 							  <tr>
 								<td class="name" style="text-align: left;">Carry:</td>
 								<td style="text-align: right;"><span class="golferCarry"></span></td>
 								<td style="text-align: left;">meters</td>
+								<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerCarry"></span></td>
+								<td style="text-align: left; font-size: 11px;">meters</td>
 							  </tr>
 							  <tr>
 								<td class="name" style="text-align: left;">Side:</td>
 								<td style="text-align: right;"><span class="golferSide"></span></td>
 								<td style="text-align: left;">meters</td>
+								<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerSide"></span></td>
+								<td style="text-align: left; font-size: 11px;">meters</td>
 							  </tr>
 							</table>
 						</div>
 					</div>
+					
 					<div class="improvements">
 						<h4 style="padding-top:70px;">Jouw sterke punten</h4>
 						<div style="padding-bottom: 10px; font-size: 12px; color: #949494;">Ten opzichte van jouw referentiegroep scoor je beter op</div>
@@ -246,7 +264,7 @@
 	</div>
 	
 	<!-- Attribution -->
-	<div style="width: 100%; bottom: 20px; position: absolute;">
+	<div style="width: 100%; bottom: 20px; position: absolute;" class="attributionWrapper">
 		<div class="attribution">Deloitte  |  Swing Analytics  |  #WelkeGolfProBenJij  |  Powered by Trackman</div>
 	</div>
 

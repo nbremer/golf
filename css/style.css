@@ -1,3 +1,12 @@
+td {
+    height: 30px;
+    vertical-align: middle;
+}
+
+.tableTitle {
+	font-weight: 400;
+}
+
 /*Dowloaded from http://www.localfont.com/*/
 @font-face {
   font-family: 'Open Sans';

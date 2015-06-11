@@ -84,7 +84,7 @@ var pro = d3.nest().key(function(d) { return d.Name; }).entries(pro);
 
 var proAge = [29, 24, 23, 19, 27, 29]; //"Joost Luiten", "Daan Huizing", "Robin Kind", "Anne van Dam", "Christel Boeljon", "Dewi Schreefel"
 var proGolfEvents = ["KLM open","KLM open","KLM open","Deloitte Ladies open","Deloitte Ladies open","Deloitte Ladies open"];
-var proGolfEventsNum = [1,2,3,2,1,3];
+var proGolfEventsNum = [10,4,5,2,10,4];
 ////////////////////////////////////////////////////////////// 
 ///////////////// Step 1 - Pulsating dot ///////////////////// 
 ////////////////////////////////////////////////////////////// 
@@ -194,8 +194,16 @@ function setupPeergroup() {
 			.transition().duration(750)
 			.style("opacity", 1);
 		d3.selectAll(".btn.stepTwoElements").style("display", "inline-block");
-	}, 1000);
-	
+		
+		////////////////////////////// Adjusted ////////////////////////////
+		//Make the content center vertically
+		var moveDown = $(window).height()/2 - 162 - 
+											  ($(".definePeerGroup").height() + 100 + 
+											   $(".defineSocialMedia").height() + 50 + 
+											   $(".defineButton").height())/2; //162 it the height of the title and paddings in the top section 										   
+		d3.select(".definePeerGroup").style("padding-top", (moveDown+"px"));
+		/////////////////////////////////////////////////////////////////////
+	}, 1000);	
 
 	//Create green submit circle
 	var widthCircle = 80,
