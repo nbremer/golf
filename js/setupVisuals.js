@@ -284,7 +284,7 @@ function setupVisuals() {
 	//Margins and dimensions
 	marginCarry = {top: 30, right: 50, bottom: 30, left: 50};
 	widthCarry = $(".chart.carry").width() - marginCarry.left - marginCarry.right - paddingBetween;
-	heightCarry = 240;
+	heightCarry = 350;
 		
 	//Create axes for the chart
 	carryScale = d3.scale.linear().domain([0, 290]).range([0, widthCarry]);
@@ -302,7 +302,7 @@ function setupVisuals() {
 	//Append x axis to chart
 	carry.append("g")
 	  .attr("class", "x axis")
-	  .attr("transform", "translate(0," + 130 + ")")
+	  .attr("transform", "translate(0," + 150 + ")")
 	  .call(carryAxis);
 	  
 	//Append zero line to chart 
@@ -404,7 +404,7 @@ function setupVisuals() {
 	//Margins and dimensions
 	marginAoA = {top: 30, right: 50, bottom: 30, left: 50};
 	widthAoA = $(".chart.aoa").width() - marginAoA.left - marginAoA.right - paddingBetween;
-	heightAoA = 240;
+	heightAoA = 350;
 
 	var imageWidth = 80;
 	lineLength = 3 * imageWidth;
@@ -544,15 +544,11 @@ function setupVisuals() {
 			.transition().duration(1000)
 			.style("opacity", 1);
 
-	////////////////////////////// Adjusted ////////////////////////////
-	
 	////////////////////////////////////////////////////////////// 
 	////////////// Vertically Center Content ///////////////////// 
 	////////////////////////////////////////////////////////////// 
 	var moveDown = $(window).height()/2 - 162 - $(".defineSwingCharts").height()/2; //162 it the height of the title and paddings in the top section 										   
 	d3.select(".defineSwingCharts").style("padding-top", (moveDown+"px"));
-	
-	/////////////////////////////////////////////////////////////////////
 		
 	////////////////////////////////////////////////////////////// 
 	/////////////////// Peer Group Legend //////////////////////// 

@@ -59,7 +59,7 @@ function setupComparison() {
 				BallSpeed: d3.mean(d,function(g) {return g.BallSpeed;}),
 				Carry: d3.mean(d,function(g) {return g.Carry;}),
 				ClubSpeed: d3.mean(d,function(g) {return g.ClubSpeed;}),
-				Side: d3.mean(d,function(g) {return Math.abs(g.Side);}) //Adjusted
+				Side: d3.mean(d,function(g) {return Math.abs(g.Side);})
 			}
 		})
 		.entries(data);	
