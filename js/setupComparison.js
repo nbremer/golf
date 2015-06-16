@@ -4,7 +4,7 @@
 
 var radarData,
 	maxRadarValue;
-	
+
 function moveThreeToFour() {
 
 	//Decrease size, decrease opacity then remove
@@ -19,7 +19,6 @@ function moveThreeToFour() {
 		.transition().duration(750)
 		.style("opacity", 0);
 		
-	////////////////////////////// Adjusted ////////////////////////////
 	d3.select(".titleScore").text("Jouw gemiddelde score uit " + numSwings + " slagen");
 	
 	//Adjust the numbers on the screen
@@ -29,7 +28,8 @@ function moveThreeToFour() {
 	d3.select(".peerCarry").text(Math.round(meanCarry));
 	d3.select(".peerSide").text(Math.round(meanSide));
 	
-	////////////////////////////////////////////////////////////////////
+	//Make sure the dummy swing simulator stops
+	d3.select("body").on("click", null); //adjusted
 	
 	//Hide previous section and display the swing visuals
 	setTimeout(function(d) {
@@ -175,29 +175,9 @@ function setupComparison() {
 		width = Math.min($(".radarChart").width(), $(window).height()-405) - margin.left - margin.right, //$(window).height()-515 //290
 		height = width;
 
-	//Initiate the radar chart SVG
-	var svg = d3.select(".radarChart").append("svg")
-				.attr("width",  width + margin.left + margin.right)
-				.attr("height", height + margin.top + margin.bottom)
-				.attr("class", "radar radarChart");	
-
-	/////////////////////////////////////////////////////////
-	////////// Glow filter for some extra pizzazz ///////////
-	/////////////////////////////////////////////////////////
-	
-	//Filter for the outside glow
-	var filter = svg.append('defs').append('filter').attr('id','glow'),
-		feGaussianBlur = filter.append('feGaussianBlur').attr('stdDeviation','2.5').attr('result','coloredBlur'),
-		feMerge = filter.append('feMerge'),
-		feMergeNode_1 = feMerge.append('feMergeNode').attr('in','coloredBlur'),
-		feMergeNode_2 = feMerge.append('feMergeNode').attr('in','SourceGraphic');
-		
-	//Filter for the outside glow
-	var filterS = svg.append('defs').append('filter').attr('id','glowSmall'),
-		feGaussianBlurS = filterS.append('feGaussianBlur').attr('stdDeviation','1.5').attr('result','coloredBlur'),
-		feMergeS = filterS.append('feMerge'),
-		feMergeNodeS_1 = feMergeS.append('feMergeNode').attr('in','coloredBlur'),
-		feMergeNodeS_2 = feMergeS.append('feMergeNode').attr('in','SourceGraphic');
+	/************************ ADJUSTED ***************************/
+	//Creation of SVG taken into RadarChart function
+	/**************************************************************/
 	////////////////////////////////////////////////////////////// 
 	/////////////////// Radar chart function ///////////////////// 
 	////////////////////////////////////////////////////////////// 
@@ -231,14 +211,36 @@ function setupComparison() {
 		var radius = cfg.factor*Math.min(cfg.w/2, cfg.h/2);
 		var Format = d3.format('%');
 		
+		/************************ ADJUSTED ***************************/ 		
 		/////////////////////////////////////////////////////////
 		//////////// Create the container SVG and g /////////////
 		/////////////////////////////////////////////////////////
+
+		d3.select(id).select("svg").remove();
 		
+		//Initiate the radar chart SVG
+		var svg = d3.select(id).append("svg")
+			.attr("width",  cfg.w + cfg.margin.left + cfg.margin.right)
+			.attr("height", cfg.h + cfg.margin.top + cfg.margin.bottom)
+			.attr("class", "radar"+id);
+			
 		//Append a g element		
 		var g = svg.append("g")
 				.attr("transform", "translate(" + cfg.margin.left + "," + cfg.margin.top + ")");
 
+		/////////////////////////////////////////////////////////
+		////////// Glow filter for some extra pizzazz ///////////
+		/////////////////////////////////////////////////////////
+		
+		//Filter for the outside glow
+		var filter = svg.append('defs').append('filter').attr('id','glow'),
+			feGaussianBlur = filter.append('feGaussianBlur').attr('stdDeviation','2.5').attr('result','coloredBlur'),
+			feMerge = filter.append('feMerge'),
+			feMergeNode_1 = feMerge.append('feMergeNode').attr('in','coloredBlur'),
+			feMergeNode_2 = feMerge.append('feMergeNode').attr('in','SourceGraphic');
+			
+		/***************************************************************/
+		
 		/////////////////////////////////////////////////////////
 		/////////////// Draw the Circular grid //////////////////
 		/////////////////////////////////////////////////////////
@@ -286,8 +288,8 @@ function setupComparison() {
 			.attr("transform", function(d, i){return "translate(0, -5)"})
 			.attr("x", function(d, i){return cfg.w/2*(1-cfg.factorLegendX*Math.sin(i*cfg.radians/total))-60*Math.sin(i*cfg.radians/total);})
 			.attr("y", function(d, i){return cfg.h/2*(1-cfg.factorLegendY*Math.cos(i*cfg.radians/total))-20*Math.cos(i*cfg.radians/total);})
-			.text(function(d){return d})
-			.call(wrap, 60);
+			.text(function(d){ return d; })
+			.call(wrap, 57);
 	
 		/////////////////////////////////////////////////////////
 		///////////// Draw the radar chart blobs ////////////////
@@ -372,8 +374,7 @@ function setupComparison() {
 				.style("fill-opacity", function(d,i) {
 						if (series === 0) return 0;
 						else return 0.9;
-					})
-
+				});
 		  series++;
 		});
 	
@@ -405,11 +406,20 @@ function setupComparison() {
 	////////////////////////////////////////////////////////////// 
 	////////////////////// Make a legend ///////////////////////// 
 	////////////////////////////////////////////////////////////// 
-	
-	var legendWrapper = svg
+
+	/*********************** ADJUSTED **************************/	
+	var legendWrapper = d3.select(".radarChart").select("svg")
 		.append("g")
 		.attr("class", "legend")
 		.attr("transform", "translate(" + (10) + "," + (margin.top + height + margin.bottom - 70) + ")");
+
+	//Filter for the outside glow
+	var filterS = d3.select(".radarChart").select("svg").append('defs').append('filter').attr('id','glowSmall'),
+		feGaussianBlurS = filterS.append('feGaussianBlur').attr('stdDeviation','1.5').attr('result','coloredBlur'),
+		feMergeS = filterS.append('feMerge'),
+		feMergeNodeS_1 = feMergeS.append('feMergeNode').attr('in','coloredBlur'),
+		feMergeNodeS_2 = feMergeS.append('feMergeNode').attr('in','SourceGraphic');
+	/**************************************************************/
 		
 	//Initiate Legend	
 	var legend = legendWrapper.append("g")
@@ -433,6 +443,70 @@ function setupComparison() {
 	  .attr("dy", "0.38em")
 	  .attr("font-size", "12px")
 	  .text(function(d) { return d; });	
+	  
+	/*********************** ADJUSTED ******************************/ 
+	////////////////////////////////////////////////////////////// 
+	////////////// Create pop-up radar charts //////////////////// 
+	////////////////////////////////////////////////////////////// 	  
+
+	var marginModal = {top: 30, right: 70, bottom: 30, left: 70},
+		widthModal = 320 - marginModal.left - marginModal.right, //$(".joostLuiten").width(),
+		heightModal = widthModal,
+		radarProClass = [".joostLuiten", ".daanHuizing", ".robinKind", ".anneVanDam", ".christelBoeljon", ".dewiSchreefel"];
+	
+	//1.16 is the maximum z-score of any pro
+	var maxRadarValuePro = Math.max(1.16, d3.max(golferZscore)) ;
+
+	var radarChartOptionsPro = {
+		  w: widthModal,
+		  h: heightModal,
+		  margin: marginModal,
+		  maxValue: maxRadarValuePro*2*1.2,
+		  levels: 6,
+		  factorLegendX: 0.8,
+		  factorLegendY: 1,
+		  opacityArea: 0.35,
+		  opacityCircles: 0.3,
+		  strokeWidth: 2,
+		  color: function(d){return color[d];}
+	};
 		
+	//Text wrapping will only occur of the element is visible
+	d3.select(".proRadars").on("click", function() {
+		setTimeout(function() {
+			for (var i = 0; i < pro.length; i++) {
+				
+				var radarDataPro = [
+					[//Average
+						{axis:'Ball Speed', value: 0},
+						{axis:'Club Speed', value: 0},
+						{axis:'Carry', value: 0},
+						{axis:'Side', value: 0},
+						{axis:'Attack Angle', value: 0}
+					],
+					[//Pro
+						{axis:'Ball Speed', value: pro[i].values[1].zScore},
+						{axis:'Club Speed', value: pro[i].values[0].zScore},
+						{axis:'Carry', value: pro[i].values[3].zScore},
+						{axis:'Side', value: pro[i].values[4].zScore},
+						{axis:'Attack Angle', value: pro[i].values[2].zScore}
+					],
+					[//Golfer
+						{axis:'Ball Speed', value: golferZscore[1]},
+						{axis:'Club Speed', value: golferZscore[0]},
+						{axis:'Carry', value: golferZscore[3]},
+						{axis:'Side', value: golferZscore[4]},
+						{axis:'Attack Angle', value: golferZscore[2]}
+					]	
+				];
+
+				//Call function to draw the Radar chart
+				RadarChart.draw(radarProClass[i], radarDataPro, radarChartOptionsPro);
+				
+			}//for i
+		}, 100);
+	});
+	/*********************************************************************/ 
+	
 }//setupComparison
 

@@ -28,239 +28,292 @@
 </head>
 <body>
 
-	<div class="chartWrapper">
-		<div id="cont" class="container-fluid">
-	
-			<!-- First step - Pulsating Circle -->
-			<div class="row text-center stepOneElements">				
-				<div class="col-sm-6 column text-center">
-					<div class="chartLeft"></div>
-				</div>
-				
-				<div class="col-sm-6 column text-center stepOneText" style="visibility: hidden;">
-					<h3 style="color: #575757;">Swing Analytics</h1>
-					<hr>
-					<img style="padding-top: 70px;" width=500 src="img/Deloitte-logo.png"/>
-					<h4 style="color: #999; padding-top: 30px; padding-bottom: 30px;">#WelkeGolfProBenJij</h4>
-					<hr>
-					<h5 style="color: #999; padding-top: 30px;">Powered by</h5>
-					<img style="padding-top: 10px;" width=200 src="img/Trackman-logo.png"/>
-				</div>
+	<div id="cont" class="container-fluid">
+
+		<!-- First step - Pulsating Circle -->
+		<div class="row text-center stepOneElements">				
+			<div class="col-sm-6 column text-center">
+				<div class="chartLeft"></div>
 			</div>
 			
-			<!-- Second step - Find Peer group -->
-			<div class="row text-center stepTwoElements">	
-				<div class="col-sm-12 column text-center">
-					<h1>Bepaal je Referentiegroep</h1> <!-- adjusted -->
-					<hr>	<!-- adjusted -->
-					
-					<div class="row text-center definePeerGroup">	<!-- adjusted --> 					
-						<div class="col-sm-12 column text-center">					
-							<div class="col-sm-4 column text-center">						
-								<h3 style="padding-bottom: 10px; padding-top: 10px;">Geslacht</h3>
-								<div id="buttonWrapper" class="btn-group gender" data-toggle="buttons">
-									<label id="button_Man" class="btn btn-default btn-xlarge" value="Man"><input type="radio" "class="btn-options"> Man </label>
-									<label id="button_Vrouw" class="btn btn-default active btn-xlarge" value="Vrouw"><input type="radio" value="Female" class="btn-options"> Vrouw </label>
-								</div>
-							</div>
-							<div class="col-sm-4 column text-center">	
-								<h3 style="padding-bottom: 10px;">Geboortejaar</h3>
-								<div id="buttonWrapper" class="btn-group age" data-toggle="buttons">
-									<label id="button_1950_1975" value="1950_1975" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> < 1975 </label>
-									<label id="button_1975_1985" value="1975_1985" class="btn btn-default active btn-xlarge"><input type="radio" class="btn-options"> 1975 - 1985 </label>
-									<label id="button_1985_1997" value="1985_1997" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 1985 - 1997 </label>
-									<!--<label id="button_1997_2015" value="1997_2015" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> > 1997 </label>-->
-								</div>
-							</div>
-							<div class="col-sm-4 column text-center">			
-								<h3 style="padding-bottom: 10px;">Handicap</h3>
-								<div id="buttonWrapper" class="btn-group handicap" data-toggle="buttons">
-									<label id="button_0_5" value="0_5" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 0 - 5 </label>
-									<label id="button_5_15" value="5_15" class="btn btn-default active btn-xlarge"><input type="radio" class="btn-options"> 5 - 15 </label>
-									<label id="button_15_25" value="15_25" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 15 - 25 </label>
-									<label id="button_25_36" value="25_36" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 25 - 36 </label>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div style="height: 100px;"></div>
-					
-					<div class="row text-center defineSocialMedia"> <!-- adjusted -->
-						<span style="font-size: 13px;">Wilt u de resultaten ook graag per e-mail ontvangen of delen via Twitter, vul dan hieronder uw gegevens in</span>
-						<div style="height: 20px;"></div>
-						<div class="col-sm-3 col-sm-offset-2 column text-center">
-							<h5 style="padding-bottom: 10px;">E-mail</h5>
-							<form role="form">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="E-mail address" id="emailInput">
-								</div>
-							</form>
-						</div>
-						<div class="col-sm-3 col-sm-offset-2 column text-center">
-							<h5 style="padding-bottom: 10px;">Twitter</h5>
-							<form role="form">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Username" id="twitterInput">
-								</div>
-							</form>
-						</div>
-					</div>
-					
-					<div style="height: 50px;"></div>
-					
-					<div class="row text-center defineButton"> <!-- adjusted -->
-						<div class="col-sm-12 column text-center">
-							<div class="submitButton" style="padding-top: 20px;"></div>
-						</div>
-					</div>
-					
-				</div>
+			<div class="col-sm-6 column text-center stepOneText" style="visibility: hidden;">
+				<h3 style="color: #575757;">Swing Analytics</h1>
+				<hr>
+				<img style="padding-top: 70px;" width=500 src="img/Deloitte-logo.png"/>
+				<h4 style="color: #999; padding-top: 30px; padding-bottom: 30px;">#WelkeGolfProBenJij</h4>
+				<hr>
+				<h5 style="color: #999; padding-top: 30px;">Powered by</h5>
+				<img style="padding-top: 10px;" width=200 src="img/Trackman-logo.png"/>
 			</div>
-			
-			<!-- Third step - Hitting charts -->
-			<div class="row text-center stepThreeElements">	
-				<h1 class="stepThreeTitle">Klaar voor slag 1</h1> <!-- adjusted -->
-				<hr> <!-- adjusted -->
-				
-				<div class="col-sm-12 column text-center defineSwingCharts"> <!-- adjusted -->
-					
-					<div class="row text-center">
-						<div class="col-sm-6 column text-center">
-							<h5>Ball Speed [m/h]</h5>
-							<div class="chart ballSpeed"></div>
-						</div>	
-						<div class="col-sm-6 column text-center">
-							<h5>Club Speed [m/h]</h5>
-							<div class="chart clubSpeed"></div>
-						</div>
-					</div>
-					
-					<div class="row text-center">
-						<div class="col-sm-6 column text-center">
-							<h5>Carry & Side [meters]</h5>
-							<div class="chart carry"></div>
-						</div>	
-						<div class="col-sm-6 column text-center">
-							<h5>Angle of Attack [degrees]</h5>
-							<div class="chart aoa"></div>
-						</div>
-					</div>					
-					
-					<div class="row text-center">
-						<div class="col-sm-3 column text-center">
-							<div class="peerGroupLegend" style="padding-top: 20px;"></div>
-						</div>
-						<div class="col-sm-6 column text-center">
-							<div class="finishButton" style="padding-top: 20px;"></div>
-						</div>
-						<div class="col-sm-3 column text-center">
-							<div></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<!-- Fourth step - Final Comparison -->
-			<div class="row text-center stepFourElements">
-				<h1 style="color: #575757;">Welke Golf Pro ben jij?</h1>
+		</div>
+		
+		<!-- Second step - Find Peer group -->
+		<div class="row text-center stepTwoElements">	
+			<div class="col-sm-12 column text-center">
+				<h1>Bepaal je Referentiegroep</h1>
 				<hr>
 				
-				<!-- Golf pro --> 
-				<div class="col-sm-4 column text-center">
-					<h4 style="padding-bottom: 10px;">Jouw swing komt het meest overeen met die van</h4>
-					<h3 class="namePro" style="padding-bottom: 30px; font-weight: 400;">Nog niet te meten totdat je minstens 18 bent</h3>
-					<img class="ProImage" width=250 src=""/>
-					<div class="golfProStats" style="font-size: 14px; padding-top: 30px;">
-							<span>Leeftijd</span><br>
-							<span class="proAge" style="font-size: 16px; color: #1A1A1A; font-weight: 400;"></span><br><br>
-							<span class="proGolfEvent"></span><br>
-							<span class="proGolfEventNum" style="font-size: 16px; color: #1A1A1A; font-weight: 400;"></span>
-					</div>
-				</div>
-				
-				<!-- Radar chart -->
-				<div class="col-sm-4 column text-center">
-					<h4 class="radarChartTitle">Vergelijking met jouw golf pro</h4>
-					<div class="radarChart"></div>
-					<div class="explanation" style="padding-top: 25px; color: #404040; font-size: 12px"> <!-- adjusted -->
-						<span>Hierboven zie je <span style="color:#81bc00; font-weight: 400;">jouw scores</span> ten opzichte van de 
-						<span style="color:#004a95; font-weight: 400;">Golf Pro</span> op wiens swing die van jou het meeste lijkt.</span><br>
-						De gemiddelde scores van jouw referentiegroep en de referentiegroep van de Pro zijn allebei weergeven met de donkergrijze lijn. 
-						Omdat dit standaardscores zijn ligt de grijze lijn als cirkel in het midden.</div>
-				</div>
-				
-				<!-- Averages golfer --> <!-- adjusted -->
-				<div class="col-sm-4 column text-center">
-					<div class="averagesSwing">
-						<h4 class="titleScore" style="padding-bottom: 15px;">Jouw gemiddelde score</h4>
-						<!-- table showing the averages of the swings -->
-						<div style="font-size: 15px; width:100%; height:100%;">
-							<table>
-							   <tr>
-								<td class="name" style="text-align: right;"></td>
-								<td class="tableTitle" colspan = "2">Jouw Scores</td>
-								<td class="tableTitle" colspan = "2" style="padding-left: 30px;">Referentiegroep</td>
-							  </tr>
-							  <tr>
-								<td class="name" style="text-align: left;">Ball Speed:</td>
-								<td style="text-align: right;"><span class="golferBallSpeed"></span></td>
-								<td style="text-align: left;">miles / hour</td>
-								<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerBallSpeed"></span></td>
-								<td style="text-align: left; font-size: 11px;">miles / hour</td>
-							  </tr>
-							  <tr>
-								<td class="name" style="text-align: left;">Club Speed:</td>
-								<td style="text-align: right;"><span class="golferClubSpeed"></span></td>
-								<td style="text-align: left;">miles / hour</td>
-								<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerClubSpeed"></span></td>
-								<td style="text-align: left; font-size: 11px;">miles / hour</td>
-							  </tr>
-							  <tr>
-								<td class="name" style="text-align: left;">Attack Angle:</td>
-								<td style="text-align: right;"><span class="golferAttackAngle"></span></td>
-								<td style="text-align: left;">°</td>
-								<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerAttackAngle"></span></td>
-								<td style="text-align: left; font-size: 11px;">°</td>
-							  </tr>
-							  <tr>
-								<td class="name" style="text-align: left;">Carry:</td>
-								<td style="text-align: right;"><span class="golferCarry"></span></td>
-								<td style="text-align: left;">meters</td>
-								<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerCarry"></span></td>
-								<td style="text-align: left; font-size: 11px;">meters</td>
-							  </tr>
-							  <tr>
-								<td class="name" style="text-align: left;">Side:</td>
-								<td style="text-align: right;"><span class="golferSide"></span></td>
-								<td style="text-align: left;">meters</td>
-								<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerSide"></span></td>
-								<td style="text-align: left; font-size: 11px;">meters</td>
-							  </tr>
-							</table>
+				<div class="row text-center definePeerGroup">				
+					<div class="col-sm-12 column text-center">					
+						<div class="col-sm-4 column text-center">						
+							<h3 style="padding-bottom: 10px; padding-top: 10px;">Geslacht</h3>
+							<div id="buttonWrapper" class="btn-group gender" data-toggle="buttons">
+								<label id="button_Man" class="btn btn-default btn-xlarge" value="Man"><input type="radio" "class="btn-options"> Man </label>
+								<label id="button_Vrouw" class="btn btn-default active btn-xlarge" value="Vrouw"><input type="radio" value="Female" class="btn-options"> Vrouw </label>
+							</div>
+						</div>
+						<div class="col-sm-4 column text-center">	
+							<h3 style="padding-bottom: 10px;">Geboortejaar</h3>
+							<div id="buttonWrapper" class="btn-group age" data-toggle="buttons">
+								<label id="button_1950_1975" value="1950_1975" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> < 1975 </label>
+								<label id="button_1975_1985" value="1975_1985" class="btn btn-default active btn-xlarge"><input type="radio" class="btn-options"> 1975 - 1985 </label>
+								<label id="button_1985_1997" value="1985_1997" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 1985 - 1997 </label>
+								<!--<label id="button_1997_2015" value="1997_2015" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> > 1997 </label>-->
+							</div>
+						</div>
+						<div class="col-sm-4 column text-center">			
+							<h3 style="padding-bottom: 10px;">Handicap</h3>
+							<div id="buttonWrapper" class="btn-group handicap" data-toggle="buttons">
+								<label id="button_0_5" value="0_5" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 0 - 5 </label>
+								<label id="button_5_15" value="5_15" class="btn btn-default active btn-xlarge"><input type="radio" class="btn-options"> 5 - 15 </label>
+								<label id="button_15_25" value="15_25" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 15 - 25 </label>
+								<label id="button_25_36" value="25_36" class="btn btn-default btn-xlarge"><input type="radio" class="btn-options"> 25 - 36 </label>
+							</div>
 						</div>
 					</div>
-					
-					<div class="improvements">
-						<h4 style="padding-top:70px;">Jouw sterke punten</h4>
-						<div style="padding-bottom: 10px; font-size: 12px; color: #949494;">Ten opzichte van jouw referentiegroep scoor je beter op</div>
-						<div class="strongPoints" style="font-size: 15px;"></div>
-						<h4 style="padding-top:40px;">Jouw verbeterpunten</h4>
-						<div style="padding-bottom: 10px; font-size: 12px; color: #949494;">Ten opzichte van jouw referentiegroep scoor je minder goed op</div>
-						<div class="weakPoints" style="font-size: 15px;"></div>
+				</div>
+				
+				<div style="height: 100px;"></div>
+				
+				<div class="row text-center defineSocialMedia">
+					<span style="font-size: 13px;">Wilt u de resultaten ook graag per e-mail ontvangen of delen via Twitter, vul dan hieronder uw gegevens in</span>
+					<div style="height: 20px;"></div>
+					<div class="col-sm-3 col-sm-offset-2 column text-center">
+						<h5 style="padding-bottom: 10px;">E-mail</h5>
+						<form role="form">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="E-mail address" id="emailInput">
+							</div>
+						</form>
 					</div>
-					<div style="padding-top: 70px;">
-						<hr>
-						<h6 style="padding-bottom: 5px;">Made possible by</h6>
-						<img width=200 src="img/Deloitte-logo.png"/>
-						<img width=200 src="img/Trackman-logo.png"/>
+					<div class="col-sm-3 col-sm-offset-2 column text-center">
+						<h5 style="padding-bottom: 10px;">Twitter</h5>
+						<form role="form">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Username" id="twitterInput">
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				<div style="height: 50px;"></div>
+				
+				<div class="row text-center defineButton">
+					<div class="col-sm-12 column text-center">
+						<div class="submitButton" style="padding-top: 20px;"></div>
 					</div>
 				</div>
 				
 			</div>
-			
 		</div>
-	
+		
+		<!-- Third step - Hitting charts -->
+		<div class="row text-center stepThreeElements">	
+			<h1 class="stepThreeTitle">Klaar voor slag 1</h1>
+			<hr>
+			
+			<div class="col-sm-12 column text-center defineSwingCharts">
+				
+				<div class="row text-center">
+					<div class="col-sm-6 column text-center">
+						<h5>Ball Speed [m/h]</h5>
+						<div class="chart ballSpeed"></div>
+					</div>	
+					<div class="col-sm-6 column text-center">
+						<h5>Club Speed [m/h]</h5>
+						<div class="chart clubSpeed"></div>
+					</div>
+				</div>
+				
+				<div class="row text-center">
+					<div class="col-sm-6 column text-center">
+						<h5>Carry & Side [meters]</h5>
+						<div class="chart carry"></div>
+					</div>	
+					<div class="col-sm-6 column text-center">
+						<h5>Angle of Attack [degrees]</h5>
+						<div class="chart aoa"></div>
+					</div>
+				</div>					
+				
+				<div class="row text-center">
+					<div class="col-sm-3 column text-center">
+						<div class="peerGroupLegend" style="padding-top: 20px;"></div>
+					</div>
+					<div class="col-sm-6 column text-center">
+						<div class="finishButton" style="padding-top: 20px;"></div>
+					</div>
+					<div class="col-sm-3 column text-center">
+						<div></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Fourth step - Final Comparison -->
+		<div class="row text-center stepFourElements">
+			<h1 style="color: #575757;">Welke Golf Pro ben jij?</h1>
+			<hr>
+			
+			<!-- Golf pro --> 
+			<div class="col-sm-4 column text-center">
+				<h4 style="padding-bottom: 10px;">Jouw swing komt het meest overeen met die van</h4>
+				<h3 class="namePro" style="padding-bottom: 30px; font-weight: 400;">Nog niet te meten totdat je minstens 18 bent</h3>
+				<img class="ProImage" width=250 src=""/>
+				<div class="golfProStats" style="font-size: 14px; padding-top: 30px;">
+						<span>Leeftijd</span><br>
+						<span class="proAge" style="font-size: 16px; color: #1A1A1A; font-weight: 400;"></span><br><br>
+						<span class="proGolfEvent"></span><br>
+						<span class="proGolfEventNum" style="font-size: 16px; color: #1A1A1A; font-weight: 400;"></span>
+				</div>
+			</div>
+			
+			<!-- Radar chart -->
+			<div class="col-sm-4 column text-center">
+				<h4 class="radarChartTitle">Vergelijking met jouw golf pro</h4>
+				<div class="radarChart"></div>
+				<div class="explanation" style="padding-top: 25px; color: #404040; font-size: 11px"> <!-- adjusted -->
+					<span>Hierboven zie je <span style="color:#81bc00; font-weight: 400;">jouw scores</span> ten opzichte van de 
+					<span style="color:#004a95; font-weight: 400;">Golf Pro</span> op wiens swing die van jou het meeste lijkt. De gemiddelde scores van jouw referentiegroep en de referentiegroep van de Pro zijn allebei weergeven met de donkergrijze lijn. 
+					Omdat dit standaardscores zijn ligt de grijze lijn als cirkel in het midden.</span></div>
+				<!-- Trigger the modal with a button --><!-- adjusted -->
+				<button type="button" class="btn btn-default btn-md proRadars" style="margin-top: 10px;" data-toggle="modal" data-target="#myModal">Alle Pro's</button>
+			</div>
+			
+			<!-- Averages golfer -->
+			<div class="col-sm-4 column text-center">
+				<div class="averagesSwing">
+					<h4 class="titleScore" style="padding-bottom: 15px;">Jouw gemiddelde score</h4>
+					<!-- table showing the averages of the swings -->
+					<div style="font-size: 15px; width:100%; height:100%;">
+						<table>
+						   <tr>
+							<td class="name" style="text-align: right;"></td>
+							<td class="tableTitle" colspan = "2">Jouw Scores</td>
+							<td class="tableTitle" colspan = "2" style="padding-left: 30px;">Referentiegroep</td>
+						  </tr>
+						  <tr>
+							<td class="name" style="text-align: left;">Ball Speed:</td>
+							<td style="text-align: right;"><span class="golferBallSpeed"></span></td>
+							<td style="text-align: left;">miles / hour</td>
+							<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerBallSpeed"></span></td>
+							<td style="text-align: left; font-size: 11px;">miles / hour</td>
+						  </tr>
+						  <tr>
+							<td class="name" style="text-align: left;">Club Speed:</td>
+							<td style="text-align: right;"><span class="golferClubSpeed"></span></td>
+							<td style="text-align: left;">miles / hour</td>
+							<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerClubSpeed"></span></td>
+							<td style="text-align: left; font-size: 11px;">miles / hour</td>
+						  </tr>
+						  <tr>
+							<td class="name" style="text-align: left;">Attack Angle:</td>
+							<td style="text-align: right;"><span class="golferAttackAngle"></span></td>
+							<td style="text-align: left;">°</td>
+							<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerAttackAngle"></span></td>
+							<td style="text-align: left; font-size: 11px;">°</td>
+						  </tr>
+						  <tr>
+							<td class="name" style="text-align: left;">Carry:</td>
+							<td style="text-align: right;"><span class="golferCarry"></span></td>
+							<td style="text-align: left;">meters</td>
+							<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerCarry"></span></td>
+							<td style="text-align: left; font-size: 11px;">meters</td>
+						  </tr>
+						  <tr>
+							<td class="name" style="text-align: left;">Side:</td>
+							<td style="text-align: right;"><span class="golferSide"></span></td>
+							<td style="text-align: left;">meters</td>
+							<td style="text-align: right; font-size: 11px; padding-left: 30px;"><span class="peerSide"></span></td>
+							<td style="text-align: left; font-size: 11px;">meters</td>
+						  </tr>
+						</table>
+					</div>
+				</div>
+				
+				<div class="improvements">
+					<h4 style="padding-top:70px;">Jouw sterke punten</h4>
+					<div style="padding-bottom: 10px; font-size: 12px; color: #949494;">Ten opzichte van jouw referentiegroep scoor je beter op</div>
+					<div class="strongPoints" style="font-size: 15px;"></div>
+					<h4 style="padding-top:40px;">Jouw verbeterpunten</h4>
+					<div style="padding-bottom: 10px; font-size: 12px; color: #949494;">Ten opzichte van jouw referentiegroep scoor je minder goed op</div>
+					<div class="weakPoints" style="font-size: 15px;"></div>
+				</div>
+				<div style="padding-top: 70px;">
+					<hr>
+					<h6 style="padding-bottom: 5px;">Made possible by</h6>
+					<img width=200 src="img/Deloitte-logo.png"/>
+					<img width=200 src="img/Trackman-logo.png"/>
+				</div>
+			</div>
+
+			<!-- Modal --><!-- adjusted -->
+			<div class="modal" id="myModal">
+			  <div class="modal-dialog" style="width: 1200px;">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<!--<h4 class="modal-title">Ten opzichte van alle 6 de Pro's</h4>-->
+				  </div>
+				  <div class="modal-body">
+				  
+					<div class="row text-center">
+						<div class="col-sm-4 column">
+							<h5>Joost Luiten</h5>
+							<hr style="margin-top: 0px;">
+							<div class="joostLuiten"></div>
+						</div>
+						<div class="col-sm-4 column">
+							<h5>Daan Huizing</h5>
+							<hr style="margin-top: 0px;">
+							<div class="daanHuizing"></div>
+						</div>
+						<div class="col-sm-4 column">
+							<h5>Robin Kind</h5>
+							<hr style="margin-top: 0px;">
+							<div class="robinKind"></div>
+						</div>
+					</div>
+					
+					<div class="row text-center" style="padding-top: 20px;">
+						<div class="col-sm-4 column">
+							<h5>Anne van Dam</h5>
+							<hr style="margin-top: 0px;">
+							<div class="anneVanDam"></div>
+						</div>
+						<div class="col-sm-4 column">
+							<h5>Christel Boeljon</h5>
+							<hr style="margin-top: 0px;">
+							<div class="christelBoeljon"></div>
+						</div>
+						<div class="col-sm-4 column">
+							<h5>Dewi Schreefel</h5>
+							<hr style="margin-top: 0px;">
+							<div class="dewiSchreefel"></div>
+						</div>
+					</div>
+					
+				  </div>
+				  
+				  <!--<div class="modal-footer" style="padding-top: 0px;">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				  </div>-->
+				</div>
+			  </div>
+			</div>
+	  
+		</div>
+		
 	</div>
 	
 	<!-- Attribution -->

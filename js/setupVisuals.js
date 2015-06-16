@@ -110,7 +110,7 @@ function setupVisuals() {
 			.style("opacity", 1);
 			
 		redrawSwing(numSwings);  
-	})
+	});
 	
 	//Define the peer group means
 	chosenPeerGroup = peerGroup.filter(function(d) { return d.Age === peerGroupAge & d.Gender ===	peerGroupGender & d.Handicap === peerGroupHandicap; });
