@@ -331,6 +331,7 @@ function setupComparison() {
 						if (series === 0) return 0;
 						else return cfg.opacityArea;
 					})
+					/*
 					.on('mouseover', function (d){
 						g.selectAll("path").transition(200)
 							.style("fill-opacity", 0.1); 
@@ -340,7 +341,7 @@ function setupComparison() {
 					 .on('mouseout', function(){
 						g.selectAll("path").transition(200)
 							.style("fill-opacity", cfg.opacityArea);
-					 });
+					 })*/;
 			series++;
 		});		
 		
